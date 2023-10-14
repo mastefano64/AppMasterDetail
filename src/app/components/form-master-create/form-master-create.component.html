@@ -1,0 +1,42 @@
+<div>
+  <div mat-dialog-title>
+    <span>New master</span>
+  </div>
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="containerField">
+      <mat-form-field>
+        <input matInput name="name" placeholder="name" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="customer" placeholder="customer" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield1" placeholder="mfield1" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield2" placeholder="mfield2" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield3" placeholder="mfield3" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield4" placeholder="mfield4" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield5" placeholder="mfield5" ngModel required>
+      </mat-form-field>
+    </div>
+
+    <div class="paddingbtn">
+      <button mat-raised-button color="primary" [disabled]="f.invalid">Save</button>&nbsp;
+      <button mat-raised-button type="button" (click)="onClose()">Close</button>&nbsp;
+    </div>
+  </form>
+</div>

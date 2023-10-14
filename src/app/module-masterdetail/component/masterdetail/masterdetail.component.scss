@@ -1,0 +1,32 @@
+.panelDetail {
+  position: relative;
+}
+
+.panelSideDetail {
+  position: absolute;
+  height: 100%;
+  border: solid 1px #e7e7e7;
+  background-color: #ffffff;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+.listSideDetail {
+
+}
+
+.tableCheckboxSelection {
+  padding: 5px 5px 5px 5px;
+}
+
+.tableCheckboxSelection a {
+  cursor: pointer;
+}
+
+.tableGroupExpand {
+  padding: 5px 5px 5px 5px;
+}
+
+.tableGroupExpand a {
+  cursor: pointer;
+}

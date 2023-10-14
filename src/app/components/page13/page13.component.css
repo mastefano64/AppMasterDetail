@@ -1,0 +1,60 @@
+.panelMasterHead {
+  margin: 0px 10px 0px 10px;
+  text-align: left;
+  font-size: 14;
+}
+
+mat-card {
+  margin: 5px;
+}
+
+.panelMasterSide mat-card:hover {
+  background: #d3d3d3;
+}
+
+.masterSideSelected {
+  border: solid 1px #323232;
+}
+
+.masterLabel {
+  font-size: 15px;
+}
+
+.masterField {
+  font-size: 14px;
+}
+
+.actionMasterNew {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.actionsMaster {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding-top: 5px 0px 5px 0px;
+}
+
+.actionsDetail {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding-top: 5px 0px 5px 0px;
+}
+
+@media (max-width: 800px) {
+  .actionMasterNew {
+    flex-direction: column;
+    align-items: start
+  }
+
+  .actionMasterNew div {
+    margin-bottom: 5px;
+  }
+
+  .actionSeparator {
+    display: none
+  }
+}

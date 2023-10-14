@@ -1,0 +1,57 @@
+Per utilizzare le funzionalità di tematizzazione di Angular Material con la nuova versione 
+di SCSS che utilizza @use invece di @import, puoi farlo nel seguente modo:
+
+@use '~@angular/material' as mat;
+
+.candy-carousel {
+  // Get the default hue for a palette.
+  color: mat.$primary;
+
+  // Get a specific hue for a palette.
+  background-color: mat.$accent-300;
+
+  // Get a relative color for a hue ('lighter' or 'darker')
+  outline-color: mat.$accent-lighter;
+
+  // Get a contrast color for a hue by adding `-contrast` to any other key.
+  border-color: mat.$primary-100-contrast;
+}
+
+In questo codice, stiamo utilizzando @use per importare il modulo @angular/material con l'alias mat. Poi, all'interno 
+del selettore .candy-carousel, stiamo accedendo alle variabili definite da Angular Material per i colori di base e gli 
+sfondi utilizzando la sintassi $nome-variabile. Ad esempio, $primary per il colore principale e $accent-300 per un'accent 
+color specifico. Le funzionalità di tematizzazione sono ancora disponibili con questa nuova sintassi, ma ora utilizzano 
+variabili SCSS invece di funzioni.
+
+---
+
+Angular Material definisce una serie di variabili per i colori e le palette utilizzate nei temi. Di seguito è riportata una 
+lista di alcune delle variabili disponibili in mat.:
+
+$primary: Il colore primario predefinito.
+$accent: Il colore di accentuazione predefinito.
+$warn: Il colore di avviso predefinito.
+$foreground: Il colore del testo principale.
+$background: Il colore di sfondo principale.
+
+Inoltre, per accedere a sfumature specifiche dei colori, puoi utilizzare il nome del colore seguito dal numero della sfumatura. 
+
+Ad esempio:
+
+$primary-50, $primary-100, $primary-200, ... fino a $primary-900: Sfumature del colore primario.
+$accent-50, $accent-100, $accent-200, ... fino a $accent-900: Sfumature del colore di accentuazione.
+$warn-50, $warn-100, $warn-200, ... fino a $warn-900: Sfumature del colore di avviso.
+Per ottenere sfumature più chiare o più scure di un colore specifico, puoi utilizzare i seguenti suffissi:
+
+$primary-lighter: Una sfumatura più chiara del colore primario.
+$primary-darker: Una sfumatura più scura del colore primario.
+$accent-lighter: Una sfumatura più chiara del colore di accentuazione.
+$accent-darker: Una sfumatura più scura del colore di accentuazione.
+Per ottenere il colore contrastante per una determinata sfumatura, puoi aggiungere -contrast alla sfumatura. Ad esempio:
+
+$primary-100-contrast: Il colore contrastante per la sfumatura $primary-100.
+$accent-200-contrast: Il colore contrastante per la sfumatura $accent-200.
+
+Si noti che questa è solo una selezione delle variabili disponibili in Angular Material. Puoi esplorare ulteriori variabili e 
+personalizzazioni consultando la documentazione di Angular Material o esaminando direttamente i file SCSS forniti con il framework.
+

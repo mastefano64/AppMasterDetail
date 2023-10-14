@@ -1,0 +1,91 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '../node_modules/@swimlane/ngx-datatable/index.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import '../node_modules/@swimlane/ngx-datatable/assets/icons.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: -10px 0px 0px 0px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.navTitleCommandBar {
+  width: 100%;
+}
+
+  .navTitleCommandBar .navTitle {
+    display: inline-block;
+    width: 80%;
+    padding-left: 20px;
+  }
+
+.form-container100 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-container100>* {
+  width: 100%;
+}
+
+.form-container50 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.form-container50>* {
+  width: 100%;
+}
+
+.popup mat-form-field {
+  display: block;
+}
+
+.pagecontainer {
+  margin: 30px 15px 40px 15px;
+}
+
+.pagecontainer1 {
+  margin: 20px 15px 30px 15px;
+}
+
+.pagecontainer2 {
+  margin: 10px 15px 20px 15px;
+}
+
+.pagecontainer3 {
+  margin: 5px 5px 5px 5px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.navbarCells {
+  display: inline-block;
+  cursor: pointer;
+  margin: 4px;
+  width: 30px;
+  height: 30px;
+  background: #828fd4;
+  color: #ffffff;
+}
+
+.navbarCellsActive {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: #3f51b5;
+}

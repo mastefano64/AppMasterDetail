@@ -1,0 +1,75 @@
+<div class="panelMasterdetail" *ngIf="allrecord && currmaster && currmaster">
+  <div class="panelMaster">
+    <div>
+      <ng-container *ngTemplateOutlet="panelMasterHeadTemplate; context: { $implicit: currmaster, page: currpage }">
+      </ng-container>
+    </div>
+    <div>
+      <app-masternavbar
+        [config]="config"
+        (opensidepanel)="onOpenSidePanel($event)"
+        (changegroupselected)="onGroupSelectedChanged($event)"
+        (changedetailview)="onDetailViewChanged($event)">
+      </app-masternavbar>
+    </div>
+  </div>
+
+  <div class="panelDetail" #panelDetailDiv>
+    <div class="panelSideDetail" *ngIf="isopensideroom === true" [ngStyle]="{ 'width': panelSideWidth, 'height': panelSideHeight }">
+      <app-masterlistside
+        [config]="config"
+        [panelMasterSideTemplate]="panelMasterSideTemplate"
+        [selectedmasterpage]="selectedmasterpage"
+        [allrecord]="allrecord">
+      </app-masterlistside>
+    </div>
+    <ng-container *ngIf="slectedview === 'listcard'">
+      <div *ngFor="let detail of currdetails; let i = index">
+        <ng-container *ngTemplateOutlet="panelDetailTemplate; context: { $implicit: detail, page: currpage, index: i }">
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="slectedview === 'custom1'">
+      <ng-container *ngTemplateOutlet="panelDetailCustom1Template; context: { $implicit: currmasterdetail, page: currpage }">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="slectedview === 'custom2'">
+      <ng-container *ngTemplateOutlet="panelDetailCustom2Template; context: { $implicit: currmasterdetail, page: currpage }">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="slectedview === 'custom3'">
+      <ng-container *ngTemplateOutlet="panelDetailCustom3Template; context: { $implicit: currmasterdetail, page: currpage }">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="slectedview === 'table'">
+      <ng-container *ngIf="config.enableDetailTableSelection === true && selection">
+        <div class="tableCheckboxSelection">
+          <a (click)="confirmCheckboxSelection()">{{ config.labelTableSelection }} ({{ selectioncount }})</a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="config.enableDetailTableGroup === true">
+        <div class="tableGroupExpand">
+          <a (click)="collapseAllTable()">{{ config.labelGroupExpandAll }}</a>
+          &nbsp;-&nbsp;
+          <a (click)="expandAllTable()">{{ config.labelGroupCollapseAll }}</a>
+        </div>
+      </ng-container>
+      <app-datatable
+        [config]="config"
+        [panelDetailExpansionTemplate]="panelDetailExpansionTemplate"
+        [detailTableColumnMode]="config.detailTableColumnMode"
+        [columntable]="navigation.columnTable"
+        [columndetail]="navigation.columnDetail"
+        [rows]="currdetails"
+        [selectionenabled]="config.enableDetailTableSelection"
+        [detailenabled]="config.enableDetailTableExpansion"
+        [editenabled]="config.enableDetailTableEdit"
+        [groupenabled]="config.enableDetailTableGroup"
+        [grouprowsby]="grouprowsby"
+        (tablerowsselection)="onTableRowsSelection($event)"
+        (tableeditaction)="onTableEditAction($event)"
+        #mytable1>
+      </app-datatable>
+    </ng-container>
+  </div>
+</div>

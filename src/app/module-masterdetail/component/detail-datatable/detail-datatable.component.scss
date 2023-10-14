@@ -1,0 +1,29 @@
+:host {
+  ::ng-deep .datatable-row-detail {
+    height: 100% !important;
+  }
+
+  // ::ng-deep .datatable-icon-detail1::before {
+  //   content: '\70' !important;
+  //   text-decoration: none !important;
+  //   color: grey !important;
+  // }
+
+  // ::ng-deep .datatable-icon-detail2::before {
+  //   content: '\66' !important;
+  //   text-decoration: none !important;
+  //   color: grey !important;
+  // }
+}
+
+.expansionLabel {
+  font-size: 15px;
+}
+
+.expansionField {
+  font-size: 14px;
+}
+
+.actionsButton {
+  margin-top: -12px;
+}

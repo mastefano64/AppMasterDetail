@@ -1,0 +1,9 @@
+
+https://swimlane.github.io/ngx-datatable/#chkbox-selection
+https://swimlane.gitbook.io/ngx-datatable/
+https://github.com/swimlane/ngx-datatable/blob/master/docs/api/table/outputs.md
+
+https://swimlane.gitbook.io/ngx-datatable/api/table/inputs#selected
+
+
+

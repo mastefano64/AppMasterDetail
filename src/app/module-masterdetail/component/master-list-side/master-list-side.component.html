@@ -1,0 +1,20 @@
+<div class="panelMasterListSide">
+  <ng-container *ngIf="config.hasSarchField === true">
+    <div class="inputsearch">
+      <div class="inputsearchSx">
+        <app-masterinputsearch
+        name="search"
+        [placeholder]="labelMasterSideSearch"
+        (changetext)="onTextChanged($event)">
+      </app-masterinputsearch>
+      </div>
+      <div class="inputsearchDx">
+        &nbsp; ({{ allrecord.length }}) &nbsp;
+      </div>
+    </div>
+  </ng-container>
+  <div class="listSideMaster" *ngFor="let record of allrecord; let i = index">
+    <ng-container *ngTemplateOutlet="panelMasterSideTemplate; context: { $implicit: record, selectedMaster: selectedmasterpage, actionSelected: onMasterSelected.bind(this), index: i }">
+    </ng-container>
+  </div>
+</div>

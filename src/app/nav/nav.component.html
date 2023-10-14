@@ -1,0 +1,75 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav position="start" #sideSX>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/home']" routerLinkActive="active-link">
+        <mat-icon>home</mat-icon>
+        <span class="pl-1">Home</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page01']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1a</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page02']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1b</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page03']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1c</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page04']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1d</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page05']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1e</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page06']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1f</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page07']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example1g</span>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item [routerLink]="['/page11']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example2h</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page12']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example2i</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/page13']" routerLinkActive="active-link">
+        <mat-icon>link</mat-icon>
+        <span class="pl-1">example2l</span>
+      </a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sideSX.open('mouse')">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="navTitleCommandBar">
+      <div class="navTitle">AngularTest1</div>
+    </div>
+  </mat-toolbar>
+  <div class="pagecontainer3">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

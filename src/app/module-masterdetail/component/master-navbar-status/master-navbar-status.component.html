@@ -1,0 +1,15 @@
+<ng-container *ngIf="config.navbarStatusStyle === 'default'">
+  <div class="navbarStatus">
+    {{ navigation.currentPage + 1 }} {{ config.labelNavbarOf }} {{ navigation.maxPage + 1 }}
+  </div>
+</ng-container>
+
+<ng-container *ngIf="config.navbarStatusStyle === 'cellpage'">
+  <div class="navbarStatus">
+    <div class="navbarCells" *ngFor="let page of pages" (click)="onChangePage(page)">
+      <div class="navbarCellNum" [ngClass]="{ 'navbarCellsActive': currpage === page }">
+        {{ page + 1 }}
+      </div>
+    </div>
+  </div>
+</ng-container>

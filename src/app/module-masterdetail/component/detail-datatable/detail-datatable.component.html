@@ -1,0 +1,144 @@
+<ngx-datatable class="material"
+  [columns]="columntable"
+  [columnMode]="detailTableColumnMode"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="50"
+  [rows]="rows"
+  [limit]="pagesize"
+  [selectionType]="selectiontype"
+  [groupExpansionDefault]="groupexpansiondefault"
+  [groupRowsBy]="grouprowsby"
+  [externalPaging]="false"
+  [externalSorting]="false"
+  (select)="onSelectCheckbox($event)"
+  #mytable2>
+
+  <ng-container *ngIf="groupenabled === true && detailenabled === false">
+    <ngx-datatable-group-header [rowHeight]="50" (toggle)="onGroupToggle($event)">
+      <ng-template ngx-datatable-group-header-template let-group="group" let-expanded="expanded">
+        <div *ngIf="!group.key">
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                               (click)="toggleExpandGroup(group)">
+            <b>{{ (grouplabel === '') ? labelGroupNoGruping : grouplabel }}</b>
+          </a>
+        </div>
+        <div *ngIf="group.key">
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                               (click)="toggleExpandGroup(group)">
+            <b>{{ config.labelGroupGrupingBy }} {{ grouplabel }} ({{ group.value.length }}): {{ group.key }}</b>
+          </a>
+        </div>
+      </ng-template>
+    </ngx-datatable-group-header>
+  </ng-container>
+
+  <ng-container *ngIf="detailenabled === true && groupenabled === false">
+    <ngx-datatable-row-detail (toggle)="onDetailToggle($event)">
+      <ng-template ngx-datatable-row-detail-template let-row="row" let-expanded="expanded">
+        <div *ngIf="config.detailTableExpansionType === 'default'">
+          <div *ngFor="let col of columndetail">
+            <span class="expansionLabel">{{ col.name }}: </span><span class="expansionField">{{ row[col.name] }}</span>
+          </div>
+        </div>
+        <div *ngIf="config.detailTableExpansionType === 'template'">
+          <ng-container *ngTemplateOutlet="panelDetailExpansionTemplate; context: { $implicit: row }">
+          </ng-container>
+        </div>
+      </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+      <ng-template ngx-datatable-cell-template let-expanded="expanded" let-row="row">
+        <div>
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                               (click)="toggleExpandDetail(row)">
+          </a>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+
+  <ng-container *ngIf="selectionenabled === true">
+    <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [resizeable]="false"
+                  [draggable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+    </ngx-datatable-column>
+  </ng-container>
+
+  <ng-container *ngFor="let col of columntable">
+    <ngx-datatable-column *ngIf="col.hasWidth === false" [name]="col.name">
+      <ng-template ngx-datatable-header-template>
+        {{ col.display }}
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{ row[col.name] }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="col.hasWidth === true && col.myWidth" [name]="col.name" [width]="col.myWidth">
+      <ng-template ngx-datatable-header-template>
+        {{ col.display }}
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{ row[col.name] }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="col.hasWidth === true && col.myMinwidth" [name]="col.name" [minWidth]="col.myMinwidth">
+      <ng-template ngx-datatable-header-template>
+        {{ col.display }}
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{ row[col.name] }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="col.hasWidth === true && col.myMaxwidth" [name]="col.name" [maxWidth]="col.myMaxwidth">
+      <ng-template ngx-datatable-header-template>
+        {{ col.display }}
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{ row[col.name] }}
+      </ng-template>
+    </ngx-datatable-column>
+
+   <!-- <ngx-datatable-column *ngIf="col.hasWidth === true && col.myMaxwidth" [name]="col.name" [maxWidth]="col.myMaxwidth">
+     <ng-template ngx-datatable-header-template>
+       {{ col.display }}
+     </ng-template>
+     <ng-template ngx-datatable-cell-template let-row="row">
+       {{ row[col.name] }}
+     </ng-template>
+   </ngx-datatable-column> -->
+  </ng-container>
+
+  <ng-container *ngIf="editenabled === true && groupenabled === false">
+    <ngx-datatable-column [sortable]="false" [width]="150">
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div class="actionsButton">
+          <ng-container *ngFor="let editfield of editfields">
+            <button *ngIf="editfield.action === 'edit'" mat-icon-button type="button"
+                 [matTooltip]="editfield.tooltips" (click)="onTableEdit(row)">
+              <mat-icon>{{ editfield.icon }}</mat-icon>
+            </button>
+            <button *ngIf="editfield.action === 'delete'" mat-icon-button type="button"
+                 [matTooltip]="editfield.tooltips" (click)="onTableDelete(row)">
+              <mat-icon>{{ editfield.icon }}</mat-icon>
+            </button>
+            <button *ngIf="editfield.action === 'command1'" mat-icon-button type="button"
+                 [matTooltip]="editfield.tooltips" (click)="onTableCommand1(row)">
+              <mat-icon>{{ editfield.icon }}</mat-icon>
+            </button>
+            <button *ngIf="editfield.action === 'command2'" mat-icon-button type="button"
+                 [matTooltip]="editfield.tooltips" (click)="onTableCommand2(row)">
+              <mat-icon>{{ editfield.icon }}</mat-icon>
+            </button>
+            <button *ngIf="editfield.action === 'command2'" mat-icon-button type="button"
+                 [matTooltip]="editfield.tooltips" (click)="onTableCommand3(row)">
+              <mat-icon>{{ editfield.icon }}</mat-icon>
+            </button>
+          </ng-container>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+</ngx-datatable>

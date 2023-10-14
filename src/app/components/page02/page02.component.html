@@ -1,0 +1,43 @@
+<h2>page02 - example1b</h2>
+
+<div>
+  <div class="actionMasterNew">
+    <button mat-raised-button type="button" color="primary" (click)="onMasterCreate()">New master</button>
+  </div>
+  <app-masterdetail
+    [config]="config"
+    [column]="column"
+    [datasource]="datasource"
+    [startpage]="currpage"
+    (changepaginationitem)="onPaginationItemChanged($event)">
+
+    <div class="panelMasterHead" *panelMasterHead="let master; let page = page">
+      <span class="masterLabel">Id: </span><span class="masterField">{{ master.masterId }}</span><br>
+      <span class="masterLabel">Name: </span><span class="masterField">{{ master.name }}</span><br>
+      <span class="masterLabel">Customer: </span><span class="masterField">{{ master.customer }}</span><br>
+      <span class="masterLabel">Field1: </span><span class="masterField">{{ master.mfield1 }}</span><br>
+      <span class="masterLabel">Field2: </span><span class="masterField">{{ master.mfield2 }}</span><br>
+      <span class="masterLabel">Field3: </span><span class="masterField">{{ master.mfield3 }}</span><br>
+      <span class="masterLabel">Field4: </span><span class="masterField">{{ master.mfield4 }}</span><br>
+      <span class="masterLabel">Field5: </span><span class="masterField">{{ master.mfield5 }}</span><br>
+      <div class="actionsMaster">
+        <button mat-icon-button type="button" (click)="onMasterEdit(page, master)">
+          <mat-icon>edit</mat-icon>
+        </button>&nbsp;
+        <button mat-icon-button type="button" (click)="onMasterDelete(page, master)">
+          <mat-icon>cancel</mat-icon>
+        </button>&nbsp;
+      </div>
+    </div>
+
+    <div class="panelMasterSide" *panelMasterSide="let record; let selected = selectedMaster; let action = actionSelected; let i = index">
+      <mat-card [ngClass]="{ 'masterSideSelected': i === selected }" (click)="action(record.master)">
+        <mat-card-content>
+          <span class="masterLabel">Id: </span><span class="masterField">{{ record.master.masterId }}</span><br>
+          <span class="masterLabel">Name: </span><span class="masterField">{{ record.master.name }}</span><br>
+          <span class="masterLabel">Customer: </span><span class="masterField">{{ record.master.customer }}</span><br>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </app-masterdetail>
+</div>

@@ -1,0 +1,46 @@
+<div>
+  <div mat-dialog-title>
+    <span>Edit master</span>
+  </div>
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="containerField">
+      <div class="labelId">
+        MasterId: {{ form.masterId }}
+      </div>
+
+      <mat-form-field>
+        <input matInput name="name" placeholder="name" [ngModel]="form.name" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="customer" placeholder="customer" [ngModel]="form.customer" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield1" placeholder="mfield1" [ngModel]="form.mfield1" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield2" placeholder="mfield2" [ngModel]="form.mfield2" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield3" placeholder="mfield3" [ngModel]="form.mfield3" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield4" placeholder="mfield4" [ngModel]="form.mfield4" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput name="mfield5" placeholder="mfield5" [ngModel]="form.mfield5" required>
+      </mat-form-field>
+    </div>
+
+    <div class="paddingbtn">
+      <button mat-raised-button color="primary" [disabled]="f.invalid">Save</button>&nbsp;
+      <button mat-raised-button type="button" (click)="onClose()">Close</button>&nbsp;
+    </div>
+  </form>
+</div>

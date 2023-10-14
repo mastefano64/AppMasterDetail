@@ -1,0 +1,26 @@
+
+export interface IResult {
+  count: number,
+  items: any[],
+  page: number,
+  url: string
+}
+
+one and internal ???
+
+many(internal-y) => pagesize=9999 - count=N - items=0.N => (count=result.count)*
+one(internal-y/external-n) => pagesize=1 - count=N - items=0.1 => (count=1)
+
+const count = (this.config.typeMaster === 'many') ? result.count : 1;
+
+* count and items=0.N forse coincidono!
+
+
+
+
+
+
+
+
+
+
