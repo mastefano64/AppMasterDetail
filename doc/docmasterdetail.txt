@@ -1,0 +1,181 @@
+MasterDetail è un controllo Angular che permette di gestire la visualizzazione di fonti di dati 
+che sono legati da una relazione master-detail. Offre diverse funzionalità quali: paginazione,
+visualizzazione lista, visualizzazione tabellare, inserimento modifica, cancellazione, raggruppamenti (se si
+stà utilizzando la visualizzazione tabellare), creazione di panel di dettaglo ad hoc.
+
+*Fonti di dati:
+
+I dati vengono recuperato attraverso una chiamata fatta ad un server ed il contrato dei dati ritornati è il seguente
+
+export interface IResult {
+  count: number,
+  items: any[],
+  page: number,
+  url: string
+}
+
+l'array items a sua volta ha il seguente contratto 
+
+export interface IMasterDetailDto {
+  master: any;
+  details: any[];
+}
+
+*Paginazione
+
+Il controllo supporta 2 tipi di paginazione: 
+
+1) vengono letti tutti insieme i dati per poi paginarli attraverso una barra di navigazione interna.
+
+2) Viene letto un dato alla volta, passat al controllo MasterDetail e paginato attraverso una barra di navigazione esterna.
+
+*Layout
+
+Il layout è gestito:
+
+1) attraverso dei template cotenuto tra il tag di apertura e chiusura del controllo MasterDetail.
+
+2) attraverso un oggetto di configurazione che viene poi passata al controllo MasterDetail e mediante il quale si attivano e si disabilitano le varie funzionalità.
+
+Vediamo ora un estratto dell'oggetto di configurazione (è possibile vedere il relativo file all'interno del progetto GitHub al seguente percorso).
+
+AppMasterDetail\src\app\module-masterdetail\masterdetailconfig.ts
+
+export class MasterDetailConfig {
+  typeMaster: TypeMaster;
+  enableDetailPanel: boolean;
+  enableDetailTable: boolean;
+  enableDetailPanelCustom1: boolean;
+  enableDetailPanelCustom2: boolean;
+  enableDetailPanelCustom3: boolean;
+  enableDetailTableSelection: boolean;
+  enableDetailTableExpansion: boolean;
+  enableDetailTableEdit: boolean;
+  enableDetailTableGroup: boolean;
+  defaultDetailViewType: DetailViewType;
+  detailTableColumnMode: DetailTableColumnMode;
+  detailTableExpansionType: DetailTableExpansionType;
+  navbarStatusStyle: NavbarStatusStyle;
+  navbarStatusCellPageSize: string;
+  panelMasterSideWidth: string;
+  searchField: string[];
+  tableEditField: EditField[];
+  tableGroupField: GroupField[];
+
+  labelNavbarOf: string;
+  labelMasterSideSearch: string;
+  labelDetailToggleCardPanel: string;
+  labelDetailToggleCardTable: string;
+  labelDetailToggleCardCustom1: string;
+  labelDetailToggleCardCustom2: string;
+  labelDetailToggleCardCustom3: string;
+  labelTableSelection: string;
+  labelGroupExpandAll: string;
+  labelGroupCollapseAll: string;
+  labelGroupNoGruping: string;
+  labelGroupGrupingBy: string;
+  navbarStatusCellPageBackgroundN: string;
+  navbarStatusCellPageBackgroundA: string;
+
+  constructor() {
+    this.typeMaster = 'many';
+    this.enableDetailPanel = true;
+    this.enableDetailTable = true;
+    this.enableDetailPanelCustom1 = false;
+    this.enableDetailPanelCustom2 = false;
+    this.enableDetailPanelCustom3 = false;
+    this.enableDetailTableSelection = false;
+    this.enableDetailTableExpansion = false;
+    this.enableDetailTableEdit = false;
+    this.enableDetailTableGroup = false;
+    this.defaultDetailViewType = 'table';
+    this.detailTableColumnMode = 'force';
+    this.detailTableExpansionType = 'none';
+    this.navbarStatusStyle = 'default';
+    this.navbarStatusCellPageSize = 'barsize5';
+    this.panelMasterSideWidth = '500px';
+    this.searchField = [];
+    this.tableEditField = [];
+    this.tableGroupField = [];
+
+    this.labelNavbarOf = 'of';
+    this.labelMasterSideSearch = 'Search';
+    this.labelDetailToggleCardPanel = 'Card';
+    this.labelDetailToggleCardTable = 'Table';
+    this.labelDetailToggleCardCustom1 = 'Custom1';
+    this.labelDetailToggleCardCustom2 = 'Custom2';
+    this.labelDetailToggleCardCustom3 = 'Custom3';
+    this.labelTableSelection = 'Confirm selection';
+    this.labelGroupExpandAll = 'Expand all';
+    this.labelGroupCollapseAll = 'Collapse all';
+    this.labelGroupNoGruping = 'No gruping';
+    this.labelGroupGrupingBy = 'Gruping by';
+    this.navbarStatusCellPageBackgroundN = '#828fd4';
+    this.navbarStatusCellPageBackgroundA = '#3f51b5';
+  }
+
+  ...
+
+}
+
+Per brevità sono state ommesse alcune parti. 
+
+enableDetailPanel (abilita il panello di dettaglio definito nel template "")
+
+enableDetailTable (abilita il panello di dettaglio tabellare, non esiste un template ed internamente utiizza tla tabella ngx-datatable)
+
+enableDetailPanelCustom1 (abilita un panello di dettaglio custom definito nel template "")
+
+enableDetailPanelCustom2 (abilita un panello di dettaglio custom definito nel template "")
+
+enableDetailPanelCustom3 (abilita un panello di dettaglio custom definito nel template "")
+
+enableDetailTableSelection (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita la selezione delle righe)
+
+enableDetailTableExpansion (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di 
+fornire maggiori dettagli. Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un teplate "")
+
+enableDetailTableEdit (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle
+mostrando i relativi bottoni - tableEditField tramite il presente array vengono dichiarate le operzioni abilitate "insert, update, delete" è anche possibile definire dei comandi custom. Nota importante è altresi possibile inserire dei bottoni di edit in un pannello base
+"enableDetailPanel", questo però deve essere fatto im modo esplicito quando si cerea il template "")
+
+enableDetailTableGroup (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abiitare il raggruppamento delle righe - tableGroupField tramite il presente array vengono dichiarate le righe oggetto di raggruppamento).
+
+Come si può vedere dall'imagine possono essere presenti pi pannelli di dettaglio contemporaneamente.
+
+Prenderemo in considerazione maggiori dettagli in seguito.
+
+*Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
+
+Nel caso sia stato abilitato un pannello di detaglio "enableDetailPanel" e definito nel template "", visto che è il
+programmatore che decide cosa mostrare (in base ai dati forniti dal server), non ci sono problemi. Nel caso invece 
+di un pannello di dettaglio tabellare "enableDetailTable" (visto che internamente viene usato ngx-datatable), è necessario
+definire le colonne che verano visualizzate specificando le relative ipostazion, alcune obbligatorie 
+altre opzionali. 
+
+
+
+
+*Dati ritornati dal server
+many(internal-y) => pagesize=9999 - count=N - items=0.N => (count=result.count)*
+one(internal-y/external-n) => pagesize=1 - count=N - items=0.1 => (count=1)
+
+*Lista template ed esempi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
