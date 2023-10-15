@@ -30,6 +30,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NativeDateModule } from '@angular/material/core';
@@ -56,6 +57,7 @@ import { NativeDateModule } from '@angular/material/core';
     MatMenuModule,
     MatTabsModule,
     MatDatepickerModule,
+    MatExpansionModule,
     MatToolbarModule,
     MatSidenavModule,
     DragDropModule,
@@ -83,6 +85,7 @@ import { NativeDateModule } from '@angular/material/core';
     MatMenuModule,
     MatTabsModule,
     MatDatepickerModule,
+    MatExpansionModule,
     MatToolbarModule,
     MatSidenavModule,
     DragDropModule,
