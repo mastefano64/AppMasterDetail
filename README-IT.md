@@ -1,28 +1,35 @@
-MasterDetail è un controllo Angular che permette di gestire la visualizzazione di fonti di dati 
-che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione,
-visualizzazione lista, visualizzazione tabellare, inserimento modifica, cancellazione, raggruppamenti/campo (se si
-stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc. OLtre a lista e tabellare
-che sono comunque singolarmente abiltabili/disabilitabili.
 
-*Fonti di dati:
+### This is a master-deteil control for Angular (it is a preview).This is a master-deteil control for Angular (it is a preview).
+
+<br/>
+
+> MasterDetail è un controllo Angular che permette di gestire la visualizzazione di fonti di dati che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione visualizzazione lista, visualizzazione tabellare, inserimento modifica, cancellazione, raggruppamenti/campo (se si stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc. Oltre a lista e tabellare che sono comunque singolarmente abiltabili/disabilitabili.MasterDetail è un controllo Angular che permette di gestire la visualizzazione di fonti di dati che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione visualizzazione lista, visualizzazione tabellare, inserimento modifica, cancellazione, raggruppamenti/campo (se si stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc. Oltre a lista e tabellare che sono comunque singolarmente abiltabili/disabilitabili.
+
+<br/>
+
+#### Fonti di dati:
 
 I dati vengono recuperati attraverso una chiamata fatta ad un server ed il contrato dei dati ritornati è il seguente
 
+```
 export interface IResult {
   count: number,
   items: any[],
   page: number,
   url: string
 }
+```
 
 l'array items a sua volta ha il seguente contratto 
 
+```
 export interface IMasterDetailDto {
   master: any;
   details: any[];
 }
+```
 
-*Paginazione
+#### Paginazione
 
 Il controllo supporta 2 tipi di paginazione (interna/esterna): 
 
@@ -30,12 +37,12 @@ Il controllo supporta 2 tipi di paginazione (interna/esterna):
 
 2) viene letto un dato alla volta, passato al controllo MasterDetail e paginato attraverso una barra di navigazione esterna.
 
-E' possibile abiltare l'una o l'altra atraverso il parametro "typeMaster" all'interno della configurazione (vedi sotto) e può avere i seguenti valori: "many" o "one".
+E' possibile abiltare l'una o l'altra atraverso il parametro "**typeMaster**" all'interno della configurazione (vedi sotto) e può avere i seguenti valori: "**many**" o "**one**".
 
 many => pagesize=9999 => count=N - items=0.N  
 one => pagesize=1 => count=N - items=0.1 
 
-*Layout
+#### Layout
 
 Il layout è gestito:
 
@@ -47,6 +54,7 @@ Vediamo ora un estratto dell'oggetto di configurazione (è possibile vedere il r
 
 AppMasterDetail\src\app\module-masterdetail\masterdetailconfig.ts
 
+```js:
 export class MasterDetailConfig {
   typeMaster: TypeMaster;
   enableDetailPanel: boolean;
@@ -123,52 +131,42 @@ export class MasterDetailConfig {
   ...
 
 }
+```
 
-Per brevità sono state ommesse alcune parti. 
+Per brevità sono state ommesse alcune parti.
 
-Di seguito è possibile vedere i template gestiti dal controllo MasterDetail: "panelMasterHead", "panelMasterSide", "panelDetail", "panelDetailCustom1", "panelDetailCustom2"
-, "panelDetailCustom3", "panelDetailExpansion", "panelDetailExpansion".
+Di seguito è possibile vedere i template gestiti dal controllo MasterDetail: "**panelMasterHead**", "**panelMasterSide**", "**panelDetail**", "**panelDetailCustom1**", "**panelDetailCustom2**",  "**panelDetailCustom3**", "**panelDetailExpansion**", "**panelDetailExpansion**".
 
-Per quanto riguarda la visuaizzazione della componente master gestita dal template "panelMasterHead" ed abilitata di default.
-Nel caso vega usata una paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icoma di menu
-che mostra i dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono
-definiti tramite l'array "searchField".
+Per quanto riguarda la visuaizzazione della componente master gestita dal template "panelMasterHead" ed abilitata di default. Nel caso vega usata una paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icoma di menu
+che mostra i dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*".
 
-enableDetailPanel (abilita il panello di dettaglio definito nel template "panelDetail")
+**enableDetailPanel** (abilita il panello di dettaglio definito nel template "*panelDetail*")
 
-enableDetailTable (abilita il panello di dettaglio tabellare, non esiste un template ed internamente utiizza la tabella ngx-datatable)
+**enableDetailTable** (abilita il panello di dettaglio tabellare, non esiste un template ed internamente utiizza la tabella ngx-datatable)
 
-enableDetailPanelCustom1 (abilita un panello di dettaglio custom definito nel template "panelDetailCustom1")
+**enableDetailPanelCustom1** (abilita un panello di dettaglio custom definito nel template "*panelDetailCustom1*")
 
-enableDetailPanelCustom2 (abilita un panello di dettaglio custom definito nel template "panelDetailCustom2")
+**enableDetailPanelCustom2** (abilita un panello di dettaglio custom definito nel template "*panelDetailCustom2*")
 
-enableDetailPanelCustom3 (abilita un panello di dettaglio custom definito nel template "panelDetailCustom3")
+**enableDetailPanelCustom3** (abilita un panello di dettaglio custom definito nel template "*panelDetailCustom3*")
 
-enableDetailTableSelection (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita la selezione delle righe mediante checkbox)
+**enableDetailTableSelection** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita la selezione delle righe mediante checkbox)
 
-enableDetailTableExpansion (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di 
-fornire maggiori dettagli. Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "panelDetailExpansion")
+**enableDetailTableExpansion** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di fornire maggiori dettagli. Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "*panelDetailExpansion*")
 
-enableDetailTableEdit (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle
-mostrando i relativi bottoni. Tramite l'array "tableEditField" vengono dichiarate le operzioni abilitate "insert, update, delete" è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base
-(enableDetailPanel), questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail")
+**enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni abilitate "insert, update, delete" è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel)*, questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail")
 
-enableDetailTableGroup (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abiitare il raggruppamento delle righe. Tramite l'array tableGroupField vengono dichiarati i campi sui quali possibile abilitare il raggruppapento).
+**enableDetailTableGroup **(nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abiitare il raggruppamento delle righe. Tramite l'array "*tableGroupField*" vengono dichiarati i campi sui quali possibile abilitare il raggruppapento).
 
 Come si può vedere dall'imagine possono essere presenti pi pannelli di dettaglio contemporaneamente.
 
 Prenderemo in considerazione maggiori dettagli in seguito.
 
-*Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
+####Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
 
-Nel caso sia stato abilitato un pannello di dettaglio "enableDetailPanel" il relativo template e definito tramte "panelDetail", visto che è il
-programmatore che decide cosa mostrare (in base ai dati forniti dal server) non ci sono problemi. Nel caso invece 
-di un pannello di dettaglio tabellare "enableDetailTable" (visto che internamente viene usato ngx-datatable), è necessario
-definire le colonne che verano visualizzate specificando le relative ipostazioni, per esempio quai devoo essere visuaizzate nella tabella e 
-quali nell'eventuale panello di espansione (automaticoo custom). Esistono poi altre inpostazioni per le funzionaltà più comuni (vedi sotto).
-Obbligatori son solo "name" e "display", il campo fornito dal server ed il nome visualizzato nell'itntestazione della tabelle. li altri
-sono facoltativi, allo startup dell'applicazione vengono comuwue creati impostanto un eventualevalore di default.
+Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailPanel*" il relativo template e definito tramte "*panelDetail*", visto che è il programmatore che decide cosa mostrare (in base ai dati forniti dal server) non ci sono problemi. Nel caso invece di un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verano visualizzate specificando le relative ipostazioni, per esempio quai devoo essere visuaizzate nella tabella e quali nell'eventuale panello di espansione (automaticoo custom). Esistono poi altre impostazioni per le funzionaltà più comuni (vedi sotto). Obbligatori son solo "*name*" e "*display*", il campo fornito dal server ed il nome visualizzato nell'itntestazione della tabelle. gli altri sono facoltativi, allo startup dell'applicazione vengono comuwue creati impostanto un eventualevalore di default.
 
+```js:
 export interface IColumns {
   name: string;
   display: string;
@@ -181,9 +179,11 @@ export interface IColumns {
   myMinwidth?: number; // default undefined
   myMaxwidth?: number; // default undefined
 }
+```
 
 Sotto un esempio che mstra come definire le colonne.
 
+```js:
 mycolumn1: IColumns[] = [
     { name: 'detailId', display: 'DetailId' },
     { name: 'masterId', display: 'MasterId' },
@@ -194,9 +194,11 @@ mycolumn1: IColumns[] = [
     { name: 'dfield4', display: 'Dfield4' },
     { name: 'dfield5', display: 'Dfield5' }
 ]
+```
 
-*In questa sezione viene mostrato l'estratto di un esempio
+####In questa sezione viene mostrato l'estratto di un esempio
 
+```js:
 @Component({
   selector: 'app-page03',
   templateUrl: './page03.component.html',
@@ -411,7 +413,9 @@ export class Page03Component implements OnInit {
   }
 
 }
+```
 
+```
 <h2>page03 - example1c</h2>
 
 <div>
@@ -484,29 +488,6 @@ export class Page03Component implements OnInit {
     </div>
   </app-masterdetail>
 </div>
+```
 
-Maggiori detagli è possibile trovarli el progetto su GitHub o nella ***live deomo***
-
-===
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live deomo***
