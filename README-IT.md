@@ -492,6 +492,6 @@ Come si può vedere vengono definite le colonne e viene impostata la configurazi
 </div>
 ```
 
-Nell' template Angular sovrastante, viene definita la sezine mastre tramite il template "panelMasterHead", viene definita la sidelist tramite il template "panelMasterSide" infine viene definita la sezine di detail tramite il templae "*panelDetail*"
+Nell' template Angular sovrastante, viene definita la sezine mastre tramite il template "*panelMasterHead*", viene definita la sidelist tramite il template "*panelMasterSide*" infine viene definita la sezine di detail tramite il templae "*panelDetail*"
 
 Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live deomo***
