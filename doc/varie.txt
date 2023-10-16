@@ -1,2 +1,29 @@
 
 https://pandao.github.io/editor.md/en.html
+
+https://www.tutorialspoint.com/what-is-a-fast-forward-merge-in-git
+https://www.tutorialspoint.com/what-is-3-way-merge-or-merge-commit-in-git
+https://www.tutorialspoint.com/how-to-disable-fast-forward-merges-what-are-its-pros-and-cons-in-git
+https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+
+https://www.varonis.com/blog/git-branching
+https://dev.to/tariqabughofa/git-theirs-vs-ours-3i7h
+https://nitaym.github.io/ourstheirs/
+
+https://amanexplains.com/git-merge-conflicts/
+
+Sì, esatto. I comandi che hai scritto:
+
+bash
+Copy code
+git checkout main
+git merge --strategy=recursive -X theirs developer01
+sono corretti per spostare il contenuto del branch developer01 nel branch main, mantenendo le modifiche 
+di `developer01 e dando la priorità alle sue modifiche durante il merge.
+
+
+
+
+
+
+

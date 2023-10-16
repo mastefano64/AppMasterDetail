@@ -137,8 +137,7 @@ Per brevità sono state ommesse alcune parti.
 
 Di seguito è possibile vedere i template gestiti dal controllo MasterDetail: "**panelMasterHead**", "**panelMasterSide**", "**panelDetail**", "**panelDetailCustom1**", "**panelDetailCustom2**",  "**panelDetailCustom3**", "**panelDetailExpansion**".
 
-Per quanto riguarda la visualizzazione della componente master è gestita dal template "panelMasterHead" ed abilitata di default (non è possibile disabilitarla). Nel caso vega usata una paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu
-che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*".
+Per quanto riguarda la visualizzazione della componente master è gestita dal template "panelMasterHead" ed abilitata di default (non è possibile disabilitarla). Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". Di seguito verranno mostrate le proprietà principali.
 
 **enableDetailPanel** (abilita il panello di dettaglio definito nel template "*panelDetail*")
 
@@ -152,11 +151,11 @@ che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fa
 
 **enableDetailTableSelection** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita la selezione delle righe mediante checkbox)
 
-**enableDetailTableExpansion** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di fornire maggiori dettagli. Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "*panelDetailExpansion*")
+**enableDetailTableExpansion** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di fornire maggiori dettagli. Oltre ad abilitarla dobbiamo anche scegliere un tipo di espansione tramite la proprietà "*detailTableExpansionType*" ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietò "*detailTableExpansionType*" ed il template "*panelDetailExpansion*")
 
-**enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderata "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel)*, questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*".
+**enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*), questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*".
 
-**enableDetailTableGroup** (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abilitare il raggruppamento delle righe per colonna. Tramite l'array "*tableGroupField*" vengono dichiarate le colonne sulle quali  è possibile abilitare il raggruppapento).
+**enableDetailTableGroup** (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abilitare il raggruppamento delle righe per colonna. Tramite l'array "*tableGroupField*" vengono dichiarate le colonne sulle quali è possibile abilitare il raggruppapento).
 
 ###MOSTRAE IMMAGINI###
 
@@ -164,7 +163,7 @@ Come si può vedere dall'imagine possono essere presenti più pannelli di dettag
 
 ####Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
 
-Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailPanel*" (quello non tabellare) il relativo template e definito tramite "*panelDetail*", visto che è il programmatore che scrive il template, è lui che decide cosa mostrare (in base ai dati forniti dal server). Nel caso invece di un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. Per esempio quali devono essere visuaizzate nella tabella e quali nell'eventuale panello di espansione (automatico o custom). Esistono poi altre impostazioni per le funzionaltà più comuni. I valori obbligatori sono solo "*name*" e "*display*", il campo fornito dal server ed il nome visualizzato nell'intestazione della tabelle. Gli altri sono opzionali, allo startup dell'applicazione vengono comuwue creati impostanto un eventualevalore di default (vedi sotto).
+Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailPanel*" (quello non tabellare) il relativo template e definito tramite "*panelDetail*", visto che è il programmatore che scrive il template, è lui che decide cosa mostrare (in base ai dati forniti dal server). Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. Per esempio quali devono essere visuaizzate nella tabella e quali nell'eventuale panello di espansione (automatico o custom). Esistono poi altre impostazioni per le funzionaltà più comuni. I valori obbligatori sono solo "*name*" e "*display*", il campo fornito dal server ed il nome visualizzato nell'intestazione della tabelle. Gli altri sono opzionali, allo startup dell'applicazione vengono comuwue creati impostanto un eventuale valore di default (vedi sotto).
 
 ```js:
 export interface IColumns {
@@ -181,7 +180,7 @@ export interface IColumns {
 }
 ```
 
-Sotto un esempio che mstra come definire le colonne.
+Sotto un esempio che mostra come definire le colonne.
 
 ```js:
 mycolumn1: IColumns[] = [
@@ -492,6 +491,122 @@ Come si può vedere vengono definite le colonne e viene impostata la configurazi
 </div>
 ```
 
-Nell' template Angular sovrastante, viene definita la sezine mastre tramite il template "*panelMasterHead*", viene definita la sidelist tramite il template "*panelMasterSide*" infine viene definita la sezine di detail tramite il templae "*panelDetail*"
+Nell' template Angular sovrastante, viene definita la sezine master tramite il template "*panelMasterHead*", viene definita la sidelist tramite il template "*panelMasterSide*" infine viene definita la sezine di detail tramite il templae "*panelDetail*"
 
 Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live deomo***
+
+###Appendice 1
+
+####In questa sezione troverete l'elenco delle proprietà di input e  output del controllo masterdetail
+
+- @Input **config: MasterDetailConfig**: Tramite questa proprietà è possibile impostare la confgurazione corrente.
+
+- @Input **column: IColumns[]**: Tramite questa proprietà e possibile definire le colonne nel caso sia stato abilitato un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. 
+
+- @Input **datasource: IResult**: Contiene i dati ritornati da una chiaata rest. Il contratto è definito da "*IResult*"
+
+- @Input **startpage: number**: Specifica un eventuale pagina di partenza (opzionale).
+
+- @Output **detailtableselection: TableRowsSelectionArgs**: Quest'evento viene invocato quando vengono selezinate delle righe nella visualizzazione tabellare "*enableDetailTable*". E' necessario abilitare la funzionalità nella configurazione tramite  l'opzione "*enableDetailTableSelection*".
+
+- @Output **detailtableaction: TableEditActionArgs**: Quest'evento viene invocato quando vengono effettauate delle operazioni di edit nella visualizzazione tabellare "*enableDetailTable*". Devono essere specificate le operazioni desiderate tramite l'array "*tableEditField*", è anche possibile definire dei comandi custom custom1, custom2, custom3.
+
+- @Output **changepaginationitem: PagingArgs**: Quest'evento viene invocato quando viene effettuato un cambio pagina tramite paginazione interna.
+
+####In questa sezione troverete le proprietà dell'oggetto **MasterDetailConfig**
+
+- **typeMaster: TypeMaster**: Il parametro "**typeMaster**" può avere i seguenti valori: "**many**" o "**one**". Nel primo caso vengono caricati tutti insieme i dati e viene poi usata la paginazione interna. Nel secondo caso viene caricato un dato alla volta e viene poi usata la paginazione esterna (many => pagesize=9999 => count=N - items=0.N - one => pagesize=1 => count=N - items=0.1). Default "many".
+
+- **enableDetailPanel: boolean**: Abilita il panello di dettaglio definito nel template "*panelDetail*". Default "true".
+
+- **enableDetailTable: boolean**: Abilita il panello di dettaglio tabellare, non esiste un template ed internamente utiizza la tabella ngx-datatable. Default "true".
+
+- **enableDetailPanelCustom1: boolean**: Abilita un panello di dettaglio custom definito nel template "*panelDetailCustom1*". Default "false".
+
+- **enableDetailPanelCustom2: boolean**: Abilita un panello di dettaglio custom definito nel template "*panelDetailCustom2*". Default "false".
+
+- **enableDetailPanelCustom3: boolean**: Abilita un panello di dettaglio custom definito nel template "*panelDetailCustom3*". Default "false".
+
+- **enableDetailTableSelection: boolean**: Abilita la selezione delle righe nella visualizzazione tabellare "*enableDetailTable*". Nel caso venga abilitata verra invocato anche l'evento **enableDetailTableSelection: boolean**. Default "false".
+
+- **enableDetailTableExpansion: boolean**:  Abilita la espansione delle righe nella visualizzazione tabellare "*enableDetailTable*". Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "*panelDetailExpansion*". Default "false".
+
+- **enableDetailTableEdit: boolean**:  Abilita edit delle righe nella visualizzazione tabellare "*enableDetailTable*". Verranno creati i relativi bottoni e tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*), questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*". Default "false".
+
+ - **defaultDetailViewType: string**: Specifica il pannello di dettaglio sul quale posizionardi di default. Puo avere i seguenti valori: "listcell", "table", "custom1", "custom2", "custom2". Default "table".
+
+ - **detailTableColumnMode: string**: Nella visualizzazione tabellare internamente è usato "ngx-datatable". Quasta proprietà rimappa la proprietà "columnMode" di "ngx-datatable". I valori supportai sono: "standard" e "force". Default "force".
+
+ - **detailTableExpansionType: string**: Nella visualizzazione tabellare è possibile avere un pannello di espanzione della riga allo scopo di mostrare più dettagli. Oltre ad abilitarla tramite la proprietà "*enableDetailTableExpansion*" dobbiamo anche scegliere un tipo di espansione tramite la presente proprietà ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietò "*detailTableExpansionType*" ed il template "*panelDetailExpansion*". Default "table".
+
+- **navbarStatusStyle: string**: Se si sceglie la paginazione interna tramite la proprità "*typeMaster*" - many. Verrà creata una barra di paginazione. E'possibile creare la barra in 2 formati: "default" e "cellpage". La prima ha solo i bottoni di navigazione, la seconda anche dei riquadri che identificano le pagine. Default "default".
+
+- **navbarStatusCellPageSize: string**: Nel caso scegliamo tramite la proprietà "*navbarStatusStyle*" l'opzione "cellpage" possiamo stabilire quante cellpage visualizzare tramite la presente proprietà. Abbiamo a sisposizione 3 valori: "barsize5", "barsize7", "barsize9". Default "barsize5".
+
+- **panelMasterSideWidth: string**: Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". Di seguito verranno mostrate le proprietà principali. La larghezza di questo pannello è stabilita tramite la presente proprietà. Default "500px".
+
+- **searchField: string[]**: I campi oggetto di ricerca all'interno del pannello laterale sono definiti tramite l'array "*searchField*". Default "[]".
+
+- **tableEditField: EditField[]**: Nella visualizzazione tabellare "*enableDetailTable*", verranno creati dei bottoni e tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Default "[]".
+
+- **tableGroupField: GroupField[]**: Nella visualizzazione tabellare "*enableDetailTable*", è possibile effettuare dei raggruppamenti e tramite l'array "*tableGroupField*" vengono definti i campi oggetto di raggruppamento. Default "[]".
+
+Con le presenti proprietà vengono definite le labels per le traduzioni linguistiche.
+
+- **labelNavbarOf: string**: Default "of".
+
+- **labelMasterSideSearch: string**: Default "Search".
+
+- **labelDetailToggleCardPanel: string**: Default "Card".
+
+- **labelDetailToggleCardTable: string**: Default "Table".
+
+- **labelDetailToggleCardCustom1: string**: Default "Custom1".
+
+- **labelDetailToggleCardCustom2: string**: Default "Custom2".
+
+- **labelDetailToggleCardCustom3: string**: Default "Custom3".
+
+- **labelTableSelection: string**: Default "Confirm selection".
+
+- **labelGroupExpandAll: string**: Default "Expand all".
+
+- **labelGroupCollapseAll: string**: Default "Collapse all".
+
+- **labelGroupNoGruping: string**: Default "No gruping".
+
+- **labelGroupGrupingBy: string**: Default "Gruping by".
+
+- **navbarStatusCellPageBackgroundN: string**: Default "#828fd4".
+
+- **navbarStatusCellPageBackgroundA: string**: Default "#3f51b5".
+
+Proprietà dell'oggetto "**PagingArgs**" passato quando l'evento "**changepaginationitem**" viene invocato. Presente nelle operazioni che riguardano paginazione.
+
+- **type: TypeOperation**: Può avere i seguenti valori: "start", "first", "prev", "next", "last", "page", "cellpage", "selected".
+
+- **currentPage: number**: Pagina corrente.
+
+- **minPage: number**: Numero minimo di pagine.
+
+- **maxPage: number**: Numero massimo di pagine.
+
+- **totalCount: number**: Numero totale di record ritornati dalla query.
+
+- **pageSize: number**: Valore pagesize per la query.
+
+- **data: IMasterDetailDto[]**: All' interno di data sono contenuti i dati restituiti dalla query.
+
+Proprietà dell'oggetto "**TableRowsSelectionArgs**" passato quando l'evento "**detailtableselection**" viene invocato. Presente solo nelle operazioni che riguardano una tabella.
+
+- **currentSelection: any[]**: Contiene gli elementi correnti selezionati.
+
+- **previousSelection: any[]**: Contiene gli elementi precedenti selezionati.
+
+Proprietà dell'oggetto "**TableEditActionArgs**" passato quando l'evento "**detailtableselection**" viene invocato. Presente solo nelle operazioni che riguardano una tabella.
+
+- **page: number**: Pagina corrente.
+
+- **action: TableEditAction**: Indica l'operazione corrente. Può avere i seguenti valori:  "none", "edit", "delete", "command1", "command2", "command3".
+
+- **row: any**: Contiene la riga corrente oggetto di modifica, cancellazione o altra operazione.

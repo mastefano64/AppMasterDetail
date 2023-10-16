@@ -10,7 +10,7 @@ export type NavbarStatusStyle = 'default' | 'cellpage';
 
 export type NavbarStatusCellPageSize = 'barsize5' | 'barsize7' | 'barsize9';
 
-export type TableEditAction = 'none' | 'edit' | 'delete' | 'command1'| 'command2'| 'command3';
+export type TableEditAction = 'none' | 'edit' | 'delete' | 'command1' | 'command2' | 'command3';
 
 export class MasterDetailConfig {
   typeMaster: TypeMaster;
@@ -27,7 +27,7 @@ export class MasterDetailConfig {
   detailTableColumnMode: DetailTableColumnMode;
   detailTableExpansionType: DetailTableExpansionType;
   navbarStatusStyle: NavbarStatusStyle;
-  navbarStatusCellPageSize: string;
+  navbarStatusCellPageSize: NavbarStatusCellPageSize;
   panelMasterSideWidth: string;
   searchField: string[];
   tableEditField: EditField[];
