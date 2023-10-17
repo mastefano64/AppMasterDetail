@@ -1,4 +1,4 @@
-### This is a master-detail control for Angular (it is a preview)..
+### This is a master-detail control for Angular (it is a preview)
 
 <br/>
 

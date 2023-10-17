@@ -1,5 +1,5 @@
 
-### Questo è un controllo master-deteil per Angular (it is a preview).
+### Questo è un controllo master-deteil per Angular (it is a preview)
 
 <br/>
 
