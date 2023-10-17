@@ -4,7 +4,10 @@
 
 > MasterDetail is an Angular control that allows the display of data sources that are linked by a master-detail relationship. It offers various features, including pagination, list view, tabular view, insertion, editing, deletion, grouping/field (if tabular view is being used), creation of custom detail panels, etc... The various panels: "list", "tabular" or "custom"; however, they can be individually enabled/disabled.
 
-<br/>
+![masterdetail1](/screenshot/image1.png)
+![masterdetail2](/screenshot/image2.png)
+![masterdetail3](/screenshot/image3.png)
+![masterdetail4](/screenshot/image4.png)
 
 #### Data Sources:
 
@@ -157,11 +160,6 @@ The visualization of the master component is done by the template "panelMasterHe
 **enableDetailTableEdit** (in case a tabular detail panel is selected, it enables cell editing displaying the corresponding buttons. You can define the desired operations "insert, update, delete" (and their icons) through the "*tableEditField*" array. You can also define custom commands custom1, custom2, custom3. Importantly, if you want to insert edit buttons in a basic panel (*enableDetailPanel*) defined by the template "*tableEditField*", this must be done explicitly when creating the HTML "panelDetail" template. The use of the "*tableEditField*" array is not required.
 
 **enableDetailTableGroup** (in case a tabular detail panel is selected, you can enable grouping rows by column. You can declare the columns on which grouping is possible through the "*tableGroupField*" array).
-
-![masterdetail1](/screenshot/image1.png)
-![masterdetail2](/screenshot/image2.png)
-![masterdetail3](/screenshot/image3.png)
-![masterdetail4](/screenshot/image4.png)
 
 As can be seen from the images, multiple detail panels can be present at the same time. We will consider more details later.
 
