@@ -2,7 +2,7 @@
 
 <br/>
 
-> MasterDetail is an Angular control that allows the display of data sources that are linked by a master-detail relationship. It offers various features, including pagination, list view, tabular view, insertion, editing, deletion, grouping/field (if tabular view is being used), creation of custom detail panels, etc... In addition to "list" and "tabular" which can still be individually enabled/disabled.
+> MasterDetail is an Angular control that allows the display of data sources that are linked by a master-detail relationship. It offers various features, including pagination, list view, tabular view, insertion, editing, deletion, grouping/field (if tabular view is being used), creation of custom detail panels, etc... The various panels: "list", "tabular" or "custom"; however, they can be individually enabled/disabled.
 
 <br/>
 
@@ -19,7 +19,7 @@ export interface IResult {
 }
 ```
 
-l'array items a sua volta ha il seguente contratto 
+the items array has the following contract
 
 ```
 export interface IMasterDetailDto {
@@ -28,13 +28,15 @@ export interface IMasterDetailDto {
 }
 ```
 
+as you can see, it implements the IMasterDetailDto interface and has 2 properties: master and details.
+
 #### Pagination
 
 The control supports 2 types of pagination (internal/external):
 
 1) The data is read all at once and then paginated through an internal navigation bar.
 
-2) One piece of data is read at a time, passed to the MasterDetail control, and paginated through an external navigation bar. An external "datasource" is used, responsible for making the corresponding REST calls.
+2) One piece of data is read at a time, passed to the MasterDetail control, and paginated through an external navigation bar. An external "datasource" is used, responsible for making the corresponding REST calls (and paginate the data).
 
 You can enable one or the other mode through the "**typeMaster**" parameter within the configuration (see below) and it can have the following values: "**many**" or "**one**".
 
@@ -45,7 +47,7 @@ one => pagesize=1 => count=N - items=0.1
 
 The layout is managed:
 
-1) through a configuration object that is then passed to the MasterDetail control and with which various functionalities are enabled or disabled.
+1) through a configuration object that is then passed to the MasterDetail control, and with which various functionalities are enabled or disabled.
 
 2) through templates contained between the opening and closing tags of the MasterDetail control.
 
@@ -136,9 +138,9 @@ To keep it concise, some parts have been omitted.
 
 Below are the templates managed by the MasterDetail control:: "**panelMasterHead**", "**panelMasterSide**", "**panelDetail**", "**panelDetailCustom1**", "**panelDetailCustom2**",  "**panelDetailCustom3**", "**panelDetailExpansion**".
 
-Regarding the display of the master component, it is managed by the "panelMasterHead" template and is enabled by default (it cannot be disabled). If internal pagination is used (meaning all data is read at once), a menu icon appears on the left that opens a panel showing all the read data. You can select a value rather than searching. The fields for searching are defined through the "*searchField*" array. Below are the main properties.
+The visualization of the master component is done by the template "panelMasterHead" and enabled by default (it is not possible to disable it). If internal pagination is used (meaning all data is read at once), a menu icon appears on the left that opens a panel showing all the read data. You can select a value rather than searching. The fields for searching are defined through the "*searchField*" array. Below are the main properties.
 
-**enableDetailPanel** (enables the detail panel defined in the "*panelDetail*")
+**enableDetailPanel** (enables the detail panel defined in the "*panelDetail*" template)
 
 **enableDetailTable** (enables the tabular detail panel, there is no template and it internally uses the ngx-datatable)
 
@@ -150,19 +152,19 @@ Regarding the display of the master component, it is managed by the "panelMaster
 
 **enableDetailTableSelection** (in case a tabular detail panel is selected, it enables row selection using checkboxes)
 
-**enableDetailTableExpansion** in case a tabular detail panel is selected, it enables expanding the row to provide more details. In addition to enabling it, you need to choose an expansion type through the "*detailTableExpansionType*" property ('none', 'default', 'template'). There are 2 types of expansion: 1) the first is managed automatically, 2) the second uses the "*detailTableExpansionType*" property and the "*panelDetailExpansion*" template)
+**enableDetailTableExpansion** in case a tabular detail panel is selected, it enables expanding the row to provide more details. In addition to enabling it, you need to choose an expansion type of the row through the "*detailTableExpansionType*" property ('none', 'default', 'template'). There are 2 types of expansion: 1) the first is managed automatically, 2) the second uses the "*detailTableExpansionType*" property and the "*panelDetailExpansion*" template)
 
-**enableDetailTableEdit** (in case a tabular detail panel is selected, it enables cell editing, displaying the corresponding buttons. You can define the desired operations "insert, update, delete" (and their icons) through the "*tableEditField*" array. You can also define custom commands custom1, custom2, custom3. Importantly, if you want to insert edit buttons in a basic panel (*enableDetailPanel*), this must be done explicitly when creating the HTML "panelDetail" template. The use of the "*tableEditField*" array is not required.
+**enableDetailTableEdit** (in case a tabular detail panel is selected, it enables cell editing displaying the corresponding buttons. You can define the desired operations "insert, update, delete" (and their icons) through the "*tableEditField*" array. You can also define custom commands custom1, custom2, custom3. Importantly, if you want to insert edit buttons in a basic panel (*enableDetailPanel*) defined by the template "*tableEditField*", this must be done explicitly when creating the HTML "panelDetail" template. The use of the "*tableEditField*" array is not required.
 
 **enableDetailTableGroup** (in case a tabular detail panel is selected, you can enable grouping rows by column. You can declare the columns on which grouping is possible through the "*tableGroupField*" array).
 
 ###MOSTRAE IMMAGINI###
 
-In case a tabular detail panel is selected, you can enable grouping rows by column. You can declare the columns on which grouping is possible through the "tableGroupField" array.
+As can be seen from the images, multiple detail panels can be present at the same time. We will consider more details later.
 
-####Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
+#### Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
 
-In case a detail panel "*enableDetailPanel*" (the non-tabular one) has been enabled, its template is defined through "*panelDetail*". Since it is the programmer who writes the template, they decide what to display (based on the data provided by the server). In case a tabular detail panel "*enableDetailTable*" is enabled (as ngx-datatable is used internally), it is necessary to define the columns that will be displayed, specifying the corresponding settings. For example, which should be displayed in the table and which in the possible expansion panel (automatic or custom). There are also other settings for the most common functionalities. The mandatory values are only "*name*" and "*display*", the field provided by the server and the name displayed in the table header. The others are optional, and at application startup, a default value is created in any case (see below).
+In case a detail panel "*enableDetailPanel*" (the non-tabular one) has been enabled, its template is defined through "*panelDetail*". Since it is the programmer who writes the template, they decide what to display (based on the data provided by the server). In case a tabular detail panel "*enableDetailTable*" is enabled (the tabular oneas, ngx-datatable is used internally), it is necessary to define the columns that will be displayed, specifying the corresponding settings. For example, which should be displayed in the table and which in the possible expansion panel (automatic or custom). There are also other settings for the most common functionalities. The mandatory values are only "*name*" and "*display*", the field provided by the server and the name displayed in the table header. The others are optional, and at application startup, a default value is created in any case (see below).
 
 ```js:
 export interface IColumns {
@@ -194,7 +196,7 @@ mycolumn1: IColumns[] = [
 ]
 ```
 
-####In this section, an excerpt from an example is shown
+#### In this section, an excerpt from an example is shown
 
 ```js:
 @Component({
@@ -494,25 +496,25 @@ In the above Angular template, the master section is defined using the "*panelMa
 
 For further details, you can find the project on GitHub or in the live demo.
 
-###Appendix 1
+### Appendix 1
 
-####In this section, you'll find the list of input and output properties of the master-detail control.
+#### In this section, you'll find the list of input and output properties of the master-detail control.
 
-- @Input **config: MasterDetailConfig**: Use this property to set the current configuration.
+- **@Input config: MasterDetailConfig**: Use this property to set the current configuration.
 
-- @Input **column: IColumns[]**: Use this property to define the columns if a tabular detail panel "*enableDetailTable*" has been enabled (as it uses ngx-datatable internally). Define the columns that will be displayed, specifying their settings.
+- **@Input column: IColumns[]**: Use this property to define the columns if a tabular detail panel "*enableDetailTable*" has been enabled (as it uses ngx-datatable internally). Define the columns that will be displayed, specifying their settings.
 
-- @Input **datasource: IResult**: Contains the data returned from a REST call. The contract is defined by "*IResult*"
+- **@Input datasource: IResult**: Contains the data returned from a REST call. The contract is defined by "*IResult*"
 
-- @Input **startpage: number**: Specifies an optional starting page.
+- **@Input startpage: number**: Specifies an optional starting page.
 
-- @Output **detailtableselection: TableRowsSelectionArgs**: This event is triggered when rows are selected in the tabular view "*enableDetailTable*" It is necessary to enable this functionality in the configuration using the "*enableDetailTableSelection*" option.
+- **@Output detailtableselection: TableRowsSelectionArgs**: This event is triggered when rows are selected in the tabular view "*enableDetailTable*" It is necessary to enable this functionality in the configuration using the "*enableDetailTableSelection*" option.
 
-- @Output **detailtableaction: TableEditActionArgs**: This event is triggered when edit operations are performed in the tabular view "*enableDetailTable*" Specify the desired operations using the "*tableEditField*" array. You can also define custom commands custom1, custom2, custom3.
+- **@Output detailtableaction: TableEditActionArgs**: This event is triggered when edit operations are performed in the tabular view "*enableDetailTable*" Specify the desired operations using the "*tableEditField*" array. You can also define custom commands custom1, custom2, custom3.
 
-- @Output **changepaginationitem: PagingArgs**: This event is triggered when a page change is made using internal pagination.
+- **@Output changepaginationitem: PagingArgs**: This event is triggered when a page change is made using internal pagination.
 
-####In questa sezione troverete le proprietà dell'oggetto **MasterDetailConfig**
+#### In this section you will find the properties of the **MasterDetailConfig** object
 
 - **typeMaster: TypeMaster**: The "**typeMaster**" parameter can have the following values: "**many**" or "**one**" In the first case, data is loaded all at once and then internal pagination is used. In the second case, one data item is loaded at a time, and external pagination is used (many => pagesize=9999 => count=N - items=0.N - one => pagesize=1 => count=N - items=0.1). Default is "many."
 

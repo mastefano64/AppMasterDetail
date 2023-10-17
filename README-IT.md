@@ -3,7 +3,7 @@
 
 <br/>
 
-> MasterDetail è un controllo Angular che permette la visualizzazione di fonti di dati che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione, visualizzazione lista, visualizzazione tabellare, inserimento, modifica, cancellazione, raggruppamenti/campo (se si stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc, etc... Oltre a "lista" e "tabellare" che sono comunque singolarmente abiltabili/disabilitabili. 
+> MasterDetail è un controllo Angular che permette la visualizzazione di fonti di dati che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione, visualizzazione lista, visualizzazione tabellare, inserimento, modifica, cancellazione, raggruppamenti/campo (se si stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc, etc... I vari pannelli: "lista", "tabellare" o "custom"; sono comunque singolarmente abiltabili/disabilitabili. 
 
 <br/>
 
@@ -20,7 +20,7 @@ export interface IResult {
 }
 ```
 
-l'array items a sua volta ha il seguente contratto 
+l'array items ha il seguente contratto 
 
 ```
 export interface IMasterDetailDto {
@@ -29,13 +29,15 @@ export interface IMasterDetailDto {
 }
 ```
 
+come si può vedere implementa l'interfaccia IMasterDetailDto ed ha 2 proprietà: master e details.
+
 #### Paginazione
 
 Il controllo supporta 2 tipi di paginazione (interna/esterna): 
 
 1) i dati vengono letti tutti insieme per poi paginarli attraverso una barra di navigazione interna.
 
-2) viene letto un dato alla volta, passato al controllo MasterDetail e paginato attraverso una barra di navigazione esterna. Viene utilizzato un "datasorce" esterno al controllo, che si occupa di fare le relative chiamate rest.
+2) viene letto un dato alla volta, passato al controllo MasterDetail e paginato attraverso una barra di navigazione esterna. Viene utilizzato un "datasource" esterno al controllo, che si occupa di fare le relative chiamate rest (e paginare i dati).
 
 E' quindi possibile abiltare l'una o l'altra modatità attraverso il parametro "**typeMaster**" all'interno della configurazione (vedi sotto) e può avere i seguenti valori: "**many**" o "**one**".
 
@@ -46,7 +48,7 @@ one => pagesize=1 => count=N - items=0.1
 
 Il layout è gestito:
 
-1) attraverso un oggetto di configurazione che viene poi passata al controllo MasterDetail e mediante il quale si attivano o si disabilitano le varie funzionalità.
+1) attraverso un oggetto di configurazione che viene poi passato al controllo MasterDetail, e mediante il quale si attivano o si disabilitano le varie funzionalità.
 
 2) attraverso dei template contenuti tra il tag di apertura e chiusura del controllo MasterDetail.
 
@@ -137,7 +139,7 @@ Per brevità sono state ommesse alcune parti.
 
 Di seguito è possibile vedere i template gestiti dal controllo MasterDetail: "**panelMasterHead**", "**panelMasterSide**", "**panelDetail**", "**panelDetailCustom1**", "**panelDetailCustom2**",  "**panelDetailCustom3**", "**panelDetailExpansion**".
 
-Per quanto riguarda la visualizzazione della componente master è gestita dal template "panelMasterHead" ed abilitata di default (non è possibile disabilitarla). Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". Di seguito verranno mostrate le proprietà principali.
+La visualizzazione della componente master è gestita dal template "panelMasterHead" ed abilitata di default (non è possibile disabilitarla). Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". Di seguito verranno mostrate le proprietà principali.
 
 **enableDetailPanel** (abilita il panello di dettaglio definito nel template "*panelDetail*")
 
@@ -151,19 +153,19 @@ Per quanto riguarda la visualizzazione della componente master è gestita dal te
 
 **enableDetailTableSelection** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita la selezione delle righe mediante checkbox)
 
-**enableDetailTableExpansion** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di fornire maggiori dettagli. Oltre ad abilitarla dobbiamo anche scegliere un tipo di espansione tramite la proprietà "*detailTableExpansionType*" ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietò "*detailTableExpansionType*" ed il template "*panelDetailExpansion*")
+**enableDetailTableExpansion** (nel caso sia stato selezionato un panello di dettaglio tabellare, abilita l'espansione della riga allo scopo di fornire maggiori dettagli. Oltre ad abilitarla dobbiamo anche scegliere un tipo di espansione dellla riga tramite la proprietà "*detailTableExpansionType*" ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietà "*detailTableExpansionType*" ed il template "*panelDetailExpansion*")
 
-**enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*), questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*".
+**enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*) definito dal template "*tableEditField*", questo deve essere fatto in modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*".
 
 **enableDetailTableGroup** (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abilitare il raggruppamento delle righe per colonna. Tramite l'array "*tableGroupField*" vengono dichiarate le colonne sulle quali è possibile abilitare il raggruppapento).
 
 ###MOSTRAE IMMAGINI###
 
-Come si può vedere dall'imagine possono essere presenti più pannelli di dettaglio contemporaneamente. Prenderemo in considerazione maggiori dettagli in seguito.
+Come si può vedere dalle imagini possono essere presenti più pannelli di dettaglio contemporaneamente. Prenderemo in considerazione maggiori dettagli in seguito.
 
-####Colonne nel caso sia presente un dettaglio tabellare "enableDetailTable"
+#### Columns if there is a tabular detail "enableDetailTable"
 
-Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailPanel*" (quello non tabellare) il relativo template e definito tramite "*panelDetail*", visto che è il programmatore che scrive il template, è lui che decide cosa mostrare (in base ai dati forniti dal server). Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. Per esempio quali devono essere visuaizzate nella tabella e quali nell'eventuale panello di espansione (automatico o custom). Esistono poi altre impostazioni per le funzionaltà più comuni. I valori obbligatori sono solo "*name*" e "*display*", il campo fornito dal server ed il nome visualizzato nell'intestazione della tabelle. Gli altri sono opzionali, allo startup dell'applicazione vengono comuwue creati impostanto un eventuale valore di default (vedi sotto).
+Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailPanel*" (quello non tabellare) il relativo template e definito tramite "*panelDetail*", visto che è il programmatore che scrive il template, è lui che decide cosa mostrare (in base ai dati forniti dal server). Nel caso sia stato abilitato un pannello di dettaglio "*enableDetailTable*" (quello tabellare, internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. Per esempio quali devono essere visuaizzate nella tabella e quali nell'eventuale panello di espansione (automatico o custom). Esistono poi altre impostazioni per le funzionaltà più comuni. I valori obbligatori sono solo "*name*" e "*display*", il campo fornito dal server ed il nome visualizzato nell'intestazione della tabelle. Gli altri sono opzionali, allo startup dell'applicazione vengono comunque creati impostanto un eventuale valore di default (vedi sotto).
 
 ```js:
 export interface IColumns {
@@ -195,7 +197,7 @@ mycolumn1: IColumns[] = [
 ]
 ```
 
-####In questa sezione viene mostrato l'estratto di un esempio
+#### In questa sezione viene mostrato l'estratto di un esempio
 
 ```js:
 @Component({
@@ -491,29 +493,29 @@ Come si può vedere vengono definite le colonne e viene impostata la configurazi
 </div>
 ```
 
-Nell' template Angular sovrastante, viene definita la sezine master tramite il template "*panelMasterHead*", viene definita la sidelist tramite il template "*panelMasterSide*" infine viene definita la sezine di detail tramite il templae "*panelDetail*"
+Nell' template Angular sovrastante, viene definita la sezine master tramite il template "*panelMasterHead*", viene definita la sidelist tramite il template "*panelMasterSide*" infine viene definita la sezione di detail tramite il templae "*panelDetail*"
 
 Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live deomo***
 
-###Appendice 1
+### Appendice 1
 
-####In questa sezione troverete l'elenco delle proprietà di input e  output del controllo masterdetail
+#### In questa sezione troverete l'elenco delle proprietà di input e  output del controllo masterdetail
 
-- @Input **config: MasterDetailConfig**: Tramite questa proprietà è possibile impostare la confgurazione corrente.
+- **@Input config: MasterDetailConfig**: Tramite questa proprietà è possibile impostare la confgurazione corrente.
 
-- @Input **column: IColumns[]**: Tramite questa proprietà e possibile definire le colonne nel caso sia stato abilitato un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. 
+- **@Input column: IColumns[]**: Tramite questa proprietà e possibile definire le colonne nel caso sia stato abilitato un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. 
 
-- @Input **datasource: IResult**: Contiene i dati ritornati da una chiaata rest. Il contratto è definito da "*IResult*"
+- **@Input datasource: IResult**: Contiene i dati ritornati da una chiaata rest. Il contratto è definito da "*IResult*"
 
-- @Input **startpage: number**: Specifica un eventuale pagina di partenza (opzionale).
+- **@Input startpage: number**: Specifica un eventuale pagina di partenza (opzionale).
 
-- @Output **detailtableselection: TableRowsSelectionArgs**: Quest'evento viene invocato quando vengono selezinate delle righe nella visualizzazione tabellare "*enableDetailTable*". E' necessario abilitare la funzionalità nella configurazione tramite  l'opzione "*enableDetailTableSelection*".
+- **@Output **detailtableselection: TableRowsSelectionArgs**: Quest'evento viene invocato quando vengono selezinate delle righe nella visualizzazione tabellare "*enableDetailTable*". E' necessario abilitare la funzionalità nella configurazione tramite  l'opzione "*enableDetailTableSelection*".
 
-- @Output **detailtableaction: TableEditActionArgs**: Quest'evento viene invocato quando vengono effettauate delle operazioni di edit nella visualizzazione tabellare "*enableDetailTable*". Devono essere specificate le operazioni desiderate tramite l'array "*tableEditField*", è anche possibile definire dei comandi custom custom1, custom2, custom3.
+- **@Output detailtableaction: TableEditActionArgs**: Quest'evento viene invocato quando vengono effettauate delle operazioni di edit nella visualizzazione tabellare "*enableDetailTable*". Devono essere specificate le operazioni desiderate tramite l'array "*tableEditField*", è anche possibile definire dei comandi custom custom1, custom2, custom3.
 
-- @Output **changepaginationitem: PagingArgs**: Quest'evento viene invocato quando viene effettuato un cambio pagina tramite paginazione interna.
+- **@Output changepaginationitem: PagingArgs**: Quest'evento viene invocato quando viene effettuato un cambio pagina tramite paginazione interna.
 
-####In questa sezione troverete le proprietà dell'oggetto **MasterDetailConfig**
+#### In questa sezione troverete le proprietà dell'oggetto **MasterDetailConfig**
 
 - **typeMaster: TypeMaster**: Il parametro "**typeMaster**" può avere i seguenti valori: "**many**" o "**one**". Nel primo caso vengono caricati tutti insieme i dati e viene poi usata la paginazione interna. Nel secondo caso viene caricato un dato alla volta e viene poi usata la paginazione esterna (many => pagesize=9999 => count=N - items=0.N - one => pagesize=1 => count=N - items=0.1). Default "many".
 
