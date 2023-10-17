@@ -159,7 +159,10 @@ La visualizzazione della componente master è gestita dal template "panelMasterH
 
 **enableDetailTableGroup** (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abilitare il raggruppamento delle righe per colonna. Tramite l'array "*tableGroupField*" vengono dichiarate le colonne sulle quali è possibile abilitare il raggruppapento).
 
-###MOSTRAE IMMAGINI###
+![masterdetail1](/screenshot/image1.png)
+![masterdetail2](/screenshot/image2.png)
+![masterdetail3](/screenshot/image3.png)
+![masterdetail4](/screenshot/image4.png)
 
 Come si può vedere dalle imagini possono essere presenti più pannelli di dettaglio contemporaneamente. Prenderemo in considerazione maggiori dettagli in seguito.
 
