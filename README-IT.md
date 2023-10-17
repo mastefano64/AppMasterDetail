@@ -505,11 +505,11 @@ Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live de
 
 - **@Input column: IColumns[]**: Tramite questa proprietà e possibile definire le colonne nel caso sia stato abilitato un pannello di dettaglio tabellare "*enableDetailTable*" (visto che internamente viene usato ngx-datatable), è necessario definire le colonne che verrano visualizzate specificando le relative ipostazioni. 
 
-- **@Input datasource: IResult**: Contiene i dati ritornati da una chiaata rest. Il contratto è definito da "*IResult*"
+- **@Input datasource: IResult**: Contiene i dati ritornati da una chiamata rest. Il contratto è definito da "*IResult*"
 
 - **@Input startpage: number**: Specifica un eventuale pagina di partenza (opzionale).
 
-- **@Output **detailtableselection: TableRowsSelectionArgs**: Quest'evento viene invocato quando vengono selezinate delle righe nella visualizzazione tabellare "*enableDetailTable*". E' necessario abilitare la funzionalità nella configurazione tramite  l'opzione "*enableDetailTableSelection*".
+- **@Output detailtableselection: TableRowsSelectionArgs**: Quest'evento viene invocato quando vengono selezinate delle righe nella visualizzazione tabellare "*enableDetailTable*". E' necessario abilitare la funzionalità nella configurazione tramite  l'opzione "*enableDetailTableSelection*".
 
 - **@Output detailtableaction: TableEditActionArgs**: Quest'evento viene invocato quando vengono effettauate delle operazioni di edit nella visualizzazione tabellare "*enableDetailTable*". Devono essere specificate le operazioni desiderate tramite l'array "*tableEditField*", è anche possibile definire dei comandi custom custom1, custom2, custom3.
 
@@ -529,9 +529,9 @@ Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live de
 
 - **enableDetailPanelCustom3: boolean**: Abilita un panello di dettaglio custom definito nel template "*panelDetailCustom3*". Default "false".
 
-- **enableDetailTableSelection: boolean**: Abilita la selezione delle righe nella visualizzazione tabellare "*enableDetailTable*". Nel caso venga abilitata verra invocato anche l'evento **enableDetailTableSelection: boolean**. Default "false".
+- **enableDetailTableSelection: boolean**: Abilita la selezione delle righe nella visualizzazione tabellare "*enableDetailTable*". Nel caso venga abilitata verra invocato anche l'evento **detailtableselection: TableRowsSelectionArgs**. Default "false".
 
-- **enableDetailTableExpansion: boolean**:  Abilita la espansione delle righe nella visualizzazione tabellare "*enableDetailTable*". Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "*panelDetailExpansion*". Default "false".
+- **enableDetailTableExpansion: boolean**:  Abilita la espansione delle righe nella visualizzazione tabellare "*enableDetailTable*". Esistono 2 tipi di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando un template "*panelDetailExpansion*". Default "false".
 
 - **enableDetailTableEdit: boolean**:  Abilita edit delle righe nella visualizzazione tabellare "*enableDetailTable*". Verranno creati i relativi bottoni e tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*), questo deve essere fatto im modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*". Default "false".
 
@@ -539,13 +539,13 @@ Maggiori detagli è possibile trovarli el progetto su GitHub o nella  ***live de
 
  - **detailTableColumnMode: string**: Nella visualizzazione tabellare internamente è usato "ngx-datatable". Quasta proprietà rimappa la proprietà "columnMode" di "ngx-datatable". I valori supportai sono: "standard" e "force". Default "force".
 
- - **detailTableExpansionType: string**: Nella visualizzazione tabellare è possibile avere un pannello di espanzione della riga allo scopo di mostrare più dettagli. Oltre ad abilitarla tramite la proprietà "*enableDetailTableExpansion*" dobbiamo anche scegliere un tipo di espansione tramite la presente proprietà ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietò "*detailTableExpansionType*" ed il template "*panelDetailExpansion*". Default "table".
+ - **detailTableExpansionType: string**: Nella visualizzazione tabellare è possibile avere un pannello di espansione della riga allo scopo di mostrare più dettagli. Oltre ad abilitarla tramite la proprietà "*enableDetailTableExpansion*" dobbiamo anche scegliere un tipo di espansione tramite la presente proprietà ('none' , 'default' , 'template'). Esistono 2 tipo di espansione: 1) la prima è gestita in modo automatico 2) la seconda utilizzando la proprietà "*detailTableExpansionType*" ed il template "*panelDetailExpansion*". Default "table".
 
 - **navbarStatusStyle: string**: Se si sceglie la paginazione interna tramite la proprità "*typeMaster*" - many. Verrà creata una barra di paginazione. E'possibile creare la barra in 2 formati: "default" e "cellpage". La prima ha solo i bottoni di navigazione, la seconda anche dei riquadri che identificano le pagine. Default "default".
 
 - **navbarStatusCellPageSize: string**: Nel caso scegliamo tramite la proprietà "*navbarStatusStyle*" l'opzione "cellpage" possiamo stabilire quante cellpage visualizzare tramite la presente proprietà. Abbiamo a sisposizione 3 valori: "barsize5", "barsize7", "barsize9". Default "barsize5".
 
-- **panelMasterSideWidth: string**: Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". Di seguito verranno mostrate le proprietà principali. La larghezza di questo pannello è stabilita tramite la presente proprietà. Default "500px".
+- **panelMasterSideWidth: string**: Nel caso vega usata la paginazione interna (ovvero vengano letti tutti insieme i dati), sulla sinisra compare un icona di menu che apre un pannello che mostra tutti dati letti. E' possibile selezionare un valore piuttosto che fare ricerche. I campi oggetto di ricerca sono definiti tramite l'array "*searchField*". La larghezza di questo pannello è stabilita tramite la presente proprietà. Default "500px".
 
 - **searchField: string[]**: I campi oggetto di ricerca all'interno del pannello laterale sono definiti tramite l'array "*searchField*". Default "[]".
 
@@ -605,7 +605,7 @@ Proprietà dell'oggetto "**TableRowsSelectionArgs**" passato quando l'evento "**
 
 - **previousSelection: any[]**: Contiene gli elementi precedenti selezionati.
 
-Proprietà dell'oggetto "**TableEditActionArgs**" passato quando l'evento "**detailtableselection**" viene invocato. Presente solo nelle operazioni che riguardano una tabella.
+Proprietà dell'oggetto "**TableEditActionArgs**" passato quando l'evento "**detailtableaction**" viene invocato. Presente solo nelle operazioni che riguardano una tabella.
 
 - **page: number**: Pagina corrente.
 

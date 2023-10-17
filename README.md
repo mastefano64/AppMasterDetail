@@ -522,13 +522,13 @@ For further details, you can find the project on GitHub or in the live demo.
 
 - **enableDetailTable: boolean**: Enables the tabular detail panel. There is no template; it uses ngx-datatable internally. Default is "true."
 
- **enableDetailPanelCustom1: boolean**: Enables a custom detail panel defined in the "*panelDetailCustom1*" template. Default is "false."
+- **enableDetailPanelCustom1: boolean**: Enables a custom detail panel defined in the "*panelDetailCustom1*" template. Default is "false."
 
 - **enableDetailPanelCustom2: boolean**: Enables a custom detail panel defined in the "*panelDetailCustom2*" template. Default is "false."
 
 - **enableDetailPanelCustom3: boolean**: Enables a custom detail panel defined in the "*panelDetailCustom3*" template. Default is "false."
 
-- **enableDetailTableSelection: boolean**: Enables row selection in the tabular view "*enableDetailTable*" If enabled, the **enableDetailTableSelection: boolean** event is also triggered. Default is "false."
+- **enableDetailTableSelection: boolean**: Enables row selection in the tabular view "*enableDetailTable*" If enabled, the **detailtableselection: TableRowsSelectionArgs** event is also triggered. Default is "false."
 
 - **enableDetailTableExpansion: boolean**: Enables row expansion in the tabular view "*enableDetailTable*" There are two types of expansion: 1) the first is automatically managed, and 2) the second uses the "*panelDetailExpansion*" template. Default is "false."
 
@@ -544,11 +544,13 @@ For further details, you can find the project on GitHub or in the live demo.
 
 - **navbarStatusCellPageSize: string**: If "cellpage" is chosen through the "*navbarStatusStyle*" property, you can set how many cell pages to display using this property. Available values are "barsize5," "barsize7," "barsize9." Default is "barsize5."
 
-- **panelMasterSideWidth: string**: If internal pagination is used (i.e., all data is read at once), a menu icon appears on the left that opens a panel displaying all the data. You can select a value or perform searches. The fields subject to search are defined using the "*searchField*" array. The width of this panel is set using this property. Default is "500px."
+- **panelMasterSideWidth: string**: If internal pagination is used (i.e., all data is read at once), a menu icon appears on the left and opens a panel that display all the data. You can select a value or perform searches. The fields subject to search are defined using the "*searchField*" array. The width of this panel is set using this property. Default is "500px."
 
 - **searchField: string[]**:  The fields subject to search within the side panel are defined using the "*searchField*" array. Default is an empty array.
 
-- **tableGroupField: GroupField[]**: In the tabular view "*enableDetailTable*", edit buttons are created, and you can declare the desired operations (insert, update, delete) and their icons through the "*tableGroupField*" array. Default is an empty array.
+- **tableEditField: EditField[]**: In the "enableDetailTable" tabular view, buttons will be created, and the desired operations "insert, update, delete" (along with their respective icons) are declared using the "*tableEditField*" array. It is also possible to define custom commands custom1, custom2, custom3. Default "[]".
+
+- **tableGroupField: GroupField[]**: In the "enableDetailTable" tabular view, you can perform grouping, and the fields subject to grouping are defined using the "tableGroupField" array. Default "[]".
 
 With these properties, labels for language translations are defined.
 
@@ -602,7 +604,7 @@ Properties of the "**TableRowsSelectionArgs**" object passed when the "**detailt
 
 - **previousSelection: any[]**: Contains the previous selected items.
 
-Properties of the "**TableEditActionArgs**" object passed when the "**detailtableselection**" event is triggered. This is present only in operations related to a table.
+Properties of the "**TableEditActionArgs**" object passed when the "**detailtableaction**" event is triggered. This is present only in operations related to a table.
 
 - **page: number**: Current page.
 
