@@ -5,7 +5,10 @@
 
 > MasterDetail è un controllo Angular che permette la visualizzazione di fonti di dati che sono legati da una relazione master-detail. Offre diverse funzionalità tra le quali: paginazione, visualizzazione lista, visualizzazione tabellare, inserimento, modifica, cancellazione, raggruppamenti/campo (se si stà utilizzando la visualizzazione tabellare), creazione di pannnelli di dettaglo ad hoc, etc... I vari pannelli: "lista", "tabellare" o "custom"; sono comunque singolarmente abiltabili/disabilitabili. 
 
-<br/>
+![masterdetail1](/screenshot/image1.png)
+![masterdetail2](/screenshot/image2.png)
+![masterdetail3](/screenshot/image3.png)
+![masterdetail4](/screenshot/image4.png)
 
 #### Fonti di dati:
 
@@ -158,11 +161,6 @@ La visualizzazione della componente master è gestita dal template "panelMasterH
 **enableDetailTableEdit** (nel caso sia stato selezionato un panello di dettaglio tabellare abilita l'edit delle celle mostrando i relativi bottoni. Tramite l'array "*tableEditField*" vengono dichiarate le operzioni desiderate "insert, update, delete" (e le relative icone), è anche possibile definire dei comandi custom custom1, custom2, custom3. Nota importante se vogliamo inserire dei bottoni di edit in un pannello base (*enableDetailPanel*) definito dal template "*tableEditField*", questo deve essere fatto in modo esplicito quando si cerea il template HTML "panelDetail". Non è richiesto l'uso del array "*tableEditField*".
 
 **enableDetailTableGroup** (nel caso sia stato selezionato un panello di dettaglio tabellare è possibile abilitare il raggruppamento delle righe per colonna. Tramite l'array "*tableGroupField*" vengono dichiarate le colonne sulle quali è possibile abilitare il raggruppapento).
-
-![masterdetail1](/screenshot/image1.png)
-![masterdetail2](/screenshot/image2.png)
-![masterdetail3](/screenshot/image3.png)
-![masterdetail4](/screenshot/image4.png)
 
 Come si può vedere dalle imagini possono essere presenti più pannelli di dettaglio contemporaneamente. Prenderemo in considerazione maggiori dettagli in seguito.
 
