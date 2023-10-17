@@ -158,7 +158,10 @@ The visualization of the master component is done by the template "panelMasterHe
 
 **enableDetailTableGroup** (in case a tabular detail panel is selected, you can enable grouping rows by column. You can declare the columns on which grouping is possible through the "*tableGroupField*" array).
 
-###MOSTRAE IMMAGINI###
+![masterdetail1](/screenshot/image1.png)
+![masterdetail2](/screenshot/image2.png)
+![masterdetail3](/screenshot/image3.png)
+![masterdetail4](/screenshot/image4.png)
 
 As can be seen from the images, multiple detail panels can be present at the same time. We will consider more details later.
 
