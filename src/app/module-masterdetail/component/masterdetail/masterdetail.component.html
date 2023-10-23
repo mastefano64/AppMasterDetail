@@ -1,6 +1,6 @@
 <div class="panelMasterdetail" *ngIf="allrecord && currmaster && currmaster">
   <div class="panelMaster">
-    <div>
+    <div class="panelMasterField">
       <ng-container *ngTemplateOutlet="panelMasterHeadTemplate; context: { $implicit: currmaster, page: currpage }">
       </ng-container>
     </div>

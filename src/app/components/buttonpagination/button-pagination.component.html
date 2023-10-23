@@ -1,8 +1,8 @@
 <ng-container *ngIf="pagstatus">
-  <button mat-raised-button [color]="color" [disabled]="!hasFirstPage" (click)="onPagingFirst()">
+  <button mat-raised-button class="btnFirst" [color]="color" [disabled]="!hasFirstPage" (click)="onPagingFirst()">
     {{ textfirst}}
   </button>&nbsp;
-  <button mat-raised-button [color]="color" [disabled]="!hasPrevPage" (click)="onPagingPrev()">
+  <button mat-raised-button class="btnPrev" [color]="color" [disabled]="!hasPrevPage" (click)="onPagingPrev()">
     {{ textprev}}
   </button>&nbsp;
   <ng-container *ngIf="paginationstyle === 'cellpage' && this.pagstatus">
@@ -19,10 +19,10 @@
       {{ pagstatus.page + 1 }} {{ textof }} {{ pagstatus.maxPage + 1 }}
     </div>&nbsp;
   </ng-container>
-  <button mat-raised-button [color]="color" [disabled]="!hasNextPage" (click)="onPagingNext()">
+  <button mat-raised-button class="btnNext" [color]="color" [disabled]="!hasNextPage" (click)="onPagingNext()">
     {{ textnext}}
   </button>&nbsp;
-  <button mat-raised-button [color]="color" [disabled]="!hasLastPage" (click)="onPagingLast()">
+  <button mat-raised-button class="btnLast" [color]="color" [disabled]="!hasLastPage" (click)="onPagingLast()">
     {{ textlast}}
   </button>&nbsp;
 </ng-container>

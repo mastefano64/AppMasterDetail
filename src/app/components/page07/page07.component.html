@@ -67,6 +67,18 @@
       </mat-card>
     </div>
 
+    <div class="panelDetailExpansion" *panelDetailExpansion="let row">
+      <div>
+        <span class="expansionLabel">Dfield2: </span><span class="expansionField">{{ row.dfield2 }}</span>
+        &nbsp;-&nbsp;
+        <span class="expansionLabel">Dfield3: </span><span class="expansionField">{{ row.dfield3 }}</span>
+        &nbsp;-&nbsp;
+        <span class="expansionLabel">Dfield4: </span><span class="expansionField">{{ row.dfield4 }}</span>
+        &nbsp;-&nbsp;
+        <span class="expansionLabel">Dfield5: </span><span class="expansionField">{{ row.dfield5 }}</span>
+      </div>
+    </div>
+
     <div class="panelDetailCustom" *panelDetailCustom1="let record; let page = page">
       <app-detailcustom1 [title]="'page07 - custom1'" [record]="record"></app-detailcustom1>
     </div>

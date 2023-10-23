@@ -50,8 +50,8 @@
     <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
       <ng-template ngx-datatable-cell-template let-expanded="expanded" let-row="row">
         <div>
-          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
-                               (click)="toggleExpandDetail(row)">
+          <a class="tableExpansionAnchor" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                                               (click)="toggleExpandDetail(row)">
           </a>
         </div>
       </ng-template>

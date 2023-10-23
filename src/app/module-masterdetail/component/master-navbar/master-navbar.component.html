@@ -1,7 +1,7 @@
 <div class="panelNavbar">
   <div class="panelNavbarSx">
     <div *ngIf="config.typeMaster === 'many'">
-      <button mat-mini-fab color="secondary" (click)="onOpenSidePanel()">
+      <button mat-mini-fab class="btnMenu" color="secondary" (click)="onOpenSidePanel()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -9,40 +9,39 @@
   <div class="panelNavbarCx">
     <div class="panelNavbarButton">
       <div class="panelNavbar1" *ngIf="navigation.typePagination === 'internal'">
-        <button mat-mini-fab color="primary" (click)="onNavBarFirstClick()" [disabled]="!navigation.hasFirstPage">
+        <button mat-mini-fab class="btnFirst" color="primary" (click)="onNavBarFirstClick()" [disabled]="!navigation.hasFirstPage">
           <mat-icon>first_page</mat-icon>
         </button>
         &nbsp;&nbsp;
-        <button mat-mini-fab color="primary" (click)="onNavBarPrevClick()" [disabled]="!navigation.hasPrevPage">
+        <button mat-mini-fab class="btnPrev" color="primary" (click)="onNavBarPrevClick()" [disabled]="!navigation.hasPrevPage">
           <mat-icon>navigate_before</mat-icon>
         </button>
         &nbsp;&nbsp;
         <app-masternavbarstatus [config]="config"></app-masternavbarstatus>
         &nbsp;&nbsp;
-        <button mat-mini-fab color="primary" (click)="onNavBarNextClick()" [disabled]="!navigation.hasNextPage">
+        <button mat-mini-fab class="btnNext" color="primary" (click)="onNavBarNextClick()" [disabled]="!navigation.hasNextPage">
           <mat-icon>navigate_next</mat-icon>
         </button>
         &nbsp;&nbsp;
-        <button mat-mini-fab color="primary" (click)="onNavBarLastClick()" [disabled]="!navigation.hasLastPage">
+        <button mat-mini-fab class="btnLast"color="primary" (click)="onNavBarLastClick()" [disabled]="!navigation.hasLastPage">
           <mat-icon>last_page</mat-icon>
         </button>
       </div>
       <div class="panelNavbar2" *ngIf="config.enableDetailTableGroup && detailViewType === 'table'">
         <mat-form-field subscriptSizing="dynamic">
-          <mat-select name="groupField" [(value)]="groupselected" (selectionChange)="onGroupsChange($event)">
+          <mat-select name="groupField" class="selectGroup" [(value)]="groupselected" (selectionChange)="onGroupsChange($event)">
             <mat-option value="-1">-- All --</mat-option>
             <mat-option *ngFor="let field of tableGroupField" [value]="field.name">
               {{ field.display }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-
       </div>
     </div>
   </div>
   <div class="panelNavbarDx">
     <ng-container *ngIf="config.enableDetailPanel && config.enableDetailTable">
-      <mat-button-toggle-group [value]="detailViewType" (change)="onViewChange($event)">
+      <mat-button-toggle-group class="selectView" [value]="detailViewType" (change)="onViewChange($event)">
         <mat-button-toggle *ngFor="let r of listradio" [value]="r.key">{{ r.value }}</mat-button-toggle>
       </mat-button-toggle-group>
     </ng-container>

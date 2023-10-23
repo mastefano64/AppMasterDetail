@@ -1,0 +1,289 @@
+
+https://docs.cypress.io/guides/core-concepts/introduction-to-cypress
+https://docs.cypress.io/guides/core-concepts/interacting-with-elements
+
+https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Assertions
+https://docs.cypress.io/api/commands/get
+https://docs.cypress.io/api/commands/contains
+https://docs.cypress.io/api/commands/find
+https://docs.cypress.io/api/commands/children
+https://docs.cypress.io/api/commands/type
+https://docs.cypress.io/api/commands/click
+https://docs.cypress.io/api/commands/should
+
+https://glebbahmutov.com/cypress-examples/commands/assertions.html#retrying-should-callback
+
+should(3)
+should(callback)
+then(callback)
+wrap
+
+asserzioni
+
+In Cypress, puoi concatenare comandi should() uno dopo l'altro per eseguire diverse asserzioni su un elemento selezionato. 
+Questo è un modo comune per verificare più condizioni su un elemento specifico. Ad esempio:
+
+javascript
+Copy code
+cy.get('element-selector')
+  .should('have.class', 'some-class')
+  .should('be.visible')
+  .should('have.text', 'Some Text');
+In questo esempio, stiamo verificando tre condizioni diverse sull'elemento selezionato in sequenza.
+
+Tuttavia, l'uso di .and() è utile quando desideri applicare più di un criterio in una singola asserzione. Ad esempio, se 
+desideri verificare che un elemento abbia una certa classe CSS e sia visibile in un'unica asserzione, puoi farlo con .and():
+
+javascript
+Copy code
+cy.get('element-selector')
+  .should('have.class', 'some-class')
+  .and('be.visible');
+.and() viene utilizzato per concatenare più condizioni all'interno di un'unica asserzione. Se usi .and() senza aver utilizzato 
+prima .should(), Cypress non saprà su cosa eseguire l'asserzione, poiché .and() deve essere utilizzato in combinazione con un'asserzione
+ precedente per specificare l'elemento su cui applicare le condizioni aggiuntive.
+
+In generale, la scelta tra l'uso di .should() e .and() dipende dalla logica specifica dei tuoi test e dalle tue esigenze di verifica 
+delle condizioni. Puoi usarli in combinazione per creare asserzioni complesse e dettagliate, ma è importante assicurarti di specificare 
+correttamente l'elemento su cui applicare le asserzioni.
+
+
+
+User
+Vuoi dire che nel runner ogni should è un asserzione. Se concateni shoul con and should().and() finisce in un unica asserzione che da 
+esito positivo o negativo?
+
+ChatGPT
+Sì, nel runner di Cypress, ogni .should() rappresenta un'asserzione separata. Quando concateni più .should() uno dopo l'altro, ciascuno 
+di essi rappresenta una condizione separata che deve essere verificata. Ad esempio:
+
+javascript
+Copy code
+cy.get('element-selector')
+  .should('have.class', 'some-class')
+  .should('be.visible')
+  .should('have.text', 'Some Text');
+
+Nell'esempio sopra, ci sono tre asserzioni separate, e il test avrà successo solo se tutte e tre le asserzioni sono verificate positivamente. 
+Se anche una sola di queste asserzioni fallisce, il test verrà considerato fallito.
+
+D'altro canto, quando utilizzi .and(), stai creando una singola asserzione composta che verifica più condizioni insieme. Ad esempio:
+
+javascript
+Copy code
+cy.get('element-selector')
+  .should('have.class', 'some-class')
+  .and('be.visible');
+
+In questo caso, entrambe le condizioni devono essere verificate con successo affinché il test venga superato. L'utilizzo di .and() in 
+questo contesto crea un'asserzione composta che verifica più condizioni in un'unica asserzione.
+
+In breve, sia .should() che .and() rappresentano asserzioni, ma .should() crea asserzioni separate, mentre .and() crea un'unica asserzione 
+composta con più condizioni. La scelta di come utilizzare queste costruzioni dipenderà dalla logica dei tuoi test e dalle tue esigenze di 
+verifica delle condizioni.
+
+
+
+User
+La documentazione dice: .and() .To chain multiple assertions together, use the .and() command.
+
+Nota la parola "together"
+ChatGPT
+Hai ragione, la documentazione di Cypress specifica che .and() è utilizzato per concatenare più asserzioni insieme. La parola "together" è 
+rilevante in quanto sottolinea che con .and(), è possibile creare un'unica asserzione composta da più condizioni che devono essere verificate 
+insieme. Quindi, quando utilizzi .and(), stai effettivamente dichiarando un insieme di asserzioni che dovrebbero essere soddisfatte in modo 
+aggregato.
+
+Ecco un esempio specifico di come .and() è utilizzato per concatenare asserzioni insieme:
+
+javascript
+Copy code
+cy.get('element-selector')
+  .should('have.class', 'some-class')
+  .and('be.visible');
+In questo caso, stai creando un'unica asserzione composta da due condizioni: che l'elemento abbia la classe 'some-class' e che sia visibile. 
+Entrambe queste condizioni devono essere verificate positivamente per il successo complessivo dell'asserzione.
+
+Quindi, la parola "together" nella documentazione sottolinea che .and() è utilizzato per creare un'unica asserzione che verifica più condizioni 
+contemporaneamente.
+
+
+
+User
+Per cui o passano tutte o nessuna
+ChatGPT
+Sì, esatto. Quando utilizzi .and() per concatenare asserzioni, significa che tutte le asserzioni concatenate devono passare affinché l'asserzione 
+composta venga considerata riuscita. Se anche una sola delle asserzioni fallisce, l'asserzione composta sarà considerata fallita. Quindi, o 
+passano tutte insieme o nessuna.
+
+
+
+User
+
+In should() possiamo anche passare una funzine di callak - Giusto?
+
+You can write your own complicated checks using .should(cb) function if included assertions are not enough. Pass a function to should() with any 
+number of explicit assertions within it. The callback function will be retried until it passes all your explicit assertions or times out.
+
+E' giusto dire che serve quando ci sono condizionic omplesse?
+
+Nessa funzione le singole asserzoni sono poi valutate con asserzoni eplicte di tipo expect() (dove non dovrebbe esserci attesa)
+ChatGPT
+Sì, è corretto dire che puoi utilizzare .should(cb) quando hai bisogno di eseguire asserzioni complesse o condizionate che non possono essere 
+eseguite facilmente con le asserzioni standard fornite da Cypress. Questo è utile quando devi scrivere delle asserzioni personalizzate o quando
+hai bisogno di eseguire verifiche più complesse sui tuoi elementi o sullo stato dell'applicazione.
+
+La funzione di callback (cb) passata a .should() può contenere qualsiasi numero di asserzioni esplicite che desideri. All'interno di questa 
+funzione, puoi utilizzare le asserzioni di tipo expect(), come se fossi all'interno di un blocco di test Mocha o Jasmine, per effettuare verifiche 
+personalizzate.
+
+Ecco un esempio di utilizzo di .should(cb):
+
+javascript
+Copy code
+cy.get('element-selector').should(($element) => {
+  expect($element).to.have.class('some-class');
+  expect($element).to.be.visible;
+  // Altre asserzioni personalizzate o condizionate
+});
+In questo esempio, stiamo passando una funzione di callback a .should(), e all'interno di questa funzione, stiamo utilizzando asserzioni esplicite 
+expect() per eseguire controlli personalizzati sull'elemento.
+
+Quindi, .should(cb) è utile quando hai bisogno di effettuare asserzioni più complesse o personalizzate, o quando devi condizionare le tue verifiche 
+in base a situazioni specifiche all'interno dei tuoi test Cypress.
+
+
+
+
+User
+Da notare che con should() ci puo' essere attesa perche cerca di recuperare l'elemento o riprova pui' volte. Con expect invece no, si aspetta che 
+l'elento ci sia. Giusto? Quando dici: All'interno di questa funzione, puoi utilizzare le asserzioni di tipo expect(), come se fossi all'interno 
+di un blocco di test Mocha o Jasmine, per effettuare verifiche personalizzate. In Mocha o Jasmine non esite la coda che c'c' in cypress?
+ChatGPT
+Hai ragione, ci sono alcune differenze importanti tra l'uso di .should() e l'uso di expect() in Cypress:
+
+.should(): Con .should(), Cypress attende che un elemento soddisfi le condizioni specificate prima di passare al passo successivo nel test. 
+Cypress esegue automaticamente dei tentativi per verificare se l'elemento soddisfa le condizioni, il che significa che può attendere per un 
+certo periodo se l'elemento non è immediatamente disponibile. Questo approccio è utile per gestire situazioni in cui un elemento potrebbe non 
+essere istantaneamente visibile o interagibile.
+
+expect(): Con expect(), stai utilizzando le asserzioni di Jasmine o Chai per verificare una condizione specifica in modo sincrono. Non c'è attesa 
+incorporata, e se l'elemento non è presente o non soddisfa la condizione, l'asserzione fallirà immediatamente.
+
+In quanto riguarda la coda di comandi in Cypress, è vero che Cypress utilizza una coda per gestire i comandi e assicurare che vengano eseguiti in 
+modo sincrono e nel giusto ordine. Tuttavia, quando utilizzi expect() all'interno di .should(cb), stai eseguendo le asserzioni come parte di una 
+funzione di callback, e Cypress gestirà la sincronicità e la coda internamente. Quindi, anche se Cypress utilizza una coda per i comandi, il codice 
+all'interno della funzione di callback viene eseguito in modo sincrono rispetto ai comandi Cypress.
+
+In Mocha o Jasmine, non c'è la stessa coda di comandi e i test sono gestiti in modo diverso, quindi le asserzioni expect() all'interno di tali 
+framework operano in modo più sincrono rispetto alle asserzioni all'interno delle funzioni di callback di Cypress.
+
+
+
+
+User
+Should vs Then
+You can write assertions inside .should(callback) or using the .then(callback) functions. The .should(callback) will retry if the assertions 
+fail and the previous command can be retried. If an assertion inside .then(callback) fails, then the test fails immediately. 
+
+Cosa vuol dire? Ce se abbiamo in should() una funzine di callak puo' ritentare ... con then() invece no.
+ChatGPT
+Sì, esatto. La differenza principale tra .should(callback) e .then(callback) in Cypress riguarda il comportamento in caso di fallimento delle 
+asserzioni.
+
+.should(callback): Quando utilizzi .should(callback) con una funzione di callback che contiene asserzioni, Cypress cercherà di ritentare 
+l'asserzione fino a quando questa non riesce o fino a quando scade il timeout. In altre parole, se un'asserzione all'interno di .should(callback) 
+fallisce temporaneamente (ad esempio, perché l'elemento non è ancora visibile), Cypress continuerà a ritentare finché l'asserzione non avrà successo o finché non scade il timeout globale del test. Questo è utile per gestire situazioni in cui l'elemento può non essere immediatamente disponibile e hai bisogno di aspettare.
+
+.then(callback): Con .then(callback), se un'asserzione fallisce all'interno della funzione di callback, il test fallirà immediatamente e non ci 
+saranno ritentativi. Questo significa che se un'asserzione all'interno di .then(callback) non ha successo, il test verrà interrotto e segnalerà
+ un errore senza ulteriori tentativi. Quindi, .then(callback) è utile quando vuoi che un'asserzione sia rigida e il test debba fallire 
+immediatamente se qualcosa non è come previsto.
+
+In generale, puoi scegliere tra .should(callback) e .then(callback) in base alle tue esigenze. Se hai bisogno di aspettare che un'asserzione 
+abbia successo e vuoi che Cypress ritenti fino a quando l'asserzione non passa, allora .should(callback) è la scelta appropriata. Se, d'altro 
+canto, desideri un comportamento più rigido e vuoi che il test fallisca immediatamente in caso di fallimento dell'asserzione, allora 
+.then(callback) è la scelta da fare.
+
+
+
+
+User
+// works, but is NOT recommended
+// because it will retry the assertion even if the object never changes
+// until the command timeout passes
+cy.wrap({ name: 'Joe' }).should((o) => {
+  expect(o).to.have.property('name', 'Joe')
+})
+// recommended: using .then to immediately fail
+// if the assertion fails
+cy.wrap({ name: 'Joe' }).then((o) => {
+  expect(o).to.have.property('name', 'Joe')
+})
+ChatGPT
+Il codice che hai fornito dimostra la differenza pratica tra l'utilizzo di .should(callback) e .then(callback) in Cypress.
+
+Nel primo esempio, utilizzando .should(callback), Cypress cercherà di ritentare l'asserzione fino a quando questa non riesce o fino a quando 
+scade il timeout del comando, anche se l'oggetto non cambia mai. In altre parole, Cypress continuerà a verificare se l'oggetto o ha la proprietà 
+'name' uguale a 'Joe', indipendentemente dal fatto che l'oggetto sia immutabile. Questo non è raccomandato, perché può comportare attese inutili 
+e prolungate.
+
+Nel secondo esempio, utilizzando .then(callback), se l'asserzione fallisce, il test fallirà immediatamente senza tentativi aggiuntivi. Questo è 
+il comportamento raccomandato quando vuoi che il test fallisca se l'asserzione non ha successo, senza aspettare inutilmente. In questo caso, se 
+l'oggetto o non ha la proprietà 'name' uguale a 'Joe', il test verrà interrotto immediatamente e segnalerà un errore.
+
+Pertanto, è consigliabile utilizzare .then(callback) quando vuoi un comportamento più rigido e immediato in caso di fallimento delle asserzioni, 
+mentre .should(callback) è utile quando è necessario attendere che un'asserzione abbia successo con ritentativi, ad esempio, quando si aspetta 
+che un elemento diventi visibile o cambino le sue proprietà.
+
+
+
+
+User
+cy.wrap({ name: 'Joe' }) viene usato se non parto da una query get() o dal risultato da piu' operazioni su di essa. Per esempio se ho un oggetto 
+javascript puro wrap() lo converte in on oggetto cypress. O va anche bene il caso dell'oggetto. Giusto altre osservazioni?
+ChatGPT
+Esatto, cy.wrap() è un modo per avvolgere un oggetto JavaScript puro in un oggetto Cypress in modo da poter applicare comandi Cypress su di esso, 
+anche se non stai partendo da una query cy.get() o dal risultato di operazioni su di essa. Questo è utile quando desideri interagire con un oggetto 
+JavaScript all'interno del contesto di un test Cypress.
+
+Ad esempio, se hai un oggetto JavaScript come { name: 'Joe' } e desideri effettuare asserzioni o eseguire operazioni su di esso utilizzando 
+Cypress, puoi utilizzare cy.wrap() per avvolgerlo e quindi eseguire comandi Cypress su di esso. Ecco un esempio:
+
+javascript
+Copy code
+cy.wrap({ name: 'Joe' }).should((o) => {
+  expect(o).to.have.property('name', 'Joe');
+});
+In questo caso, cy.wrap({ name: 'Joe' }) avvolge l'oggetto JavaScript in un oggetto Cypress, consentendo l'utilizzo di comandi Cypress come 
+.should() su di esso.
+
+Le principali osservazioni sono:
+
+cy.wrap() è utile per convertire oggetti JavaScript in oggetti Cypress in modo da poter utilizzare i comandi Cypress su di essi.
+
+Puoi utilizzare cy.wrap() anche per lavorare con dati statici o oggetti che non provengono direttamente dalla pagina web. È utile per condurre 
+asserzioni o eseguire operazioni su dati non correlati all'interazione con la pagina web.
+
+Assicurati di utilizzare cy.wrap() solo quando è necessario. Se puoi ottenere i dati direttamente dalla pagina web utilizzando cy.get() o altri 
+comandi Cypress, è preferibile farlo, poiché ciò consente di scrivere test più aderenti all'interazione utente e alle azioni sull'applicazione web.
+
+
+===
+
+
+Asnippet of Implicit wait
+
+// Implicit wait for class to appear
+cy.get("jump to slide 2'",{timeout:60000}).should('have.class','ls-nav-active');
+ASnippet of Explicit wait
+
+//Explicit wait
+cy.get("[aria-label='jump to slide 2']",{timeout:60000}).should(($x) => {
+       expect($x).to.have.class('ls-nav-active');
+})
+
+===
+
+
+
