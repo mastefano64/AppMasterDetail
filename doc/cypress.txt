@@ -13,6 +13,13 @@ https://docs.cypress.io/api/commands/should
 
 https://glebbahmutov.com/cypress-examples/commands/assertions.html#retrying-should-callback
 
+https://github.com/Lakitna/cypress-commands/blob/develop/docs/then.md
+Pass in an options object to change the default behavior of .then().
+Option	| Default                | Description
+timeout	| default CommandTimeout | Time to wait for .then() to resolve before timing out
+retry	| false	                 | Retry itself until chained assertions pass
+log	| false	                 | Displays the command in the Command log
+
 should(3)
 should(callback)
 then(callback)

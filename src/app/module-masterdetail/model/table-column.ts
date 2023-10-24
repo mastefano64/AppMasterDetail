@@ -6,7 +6,8 @@ export class TableColumn implements IColumns {
   visibleTableField?: boolean;
   orderDetailTable?: number;
   orderDetailPanel? : number;
-  sortable?: boolean;
+  formatDatetime?: string;
+  formatDecimal?: string;
   hasWidth?: boolean;
   myWidth?: number;
   myMinwidth?: number;

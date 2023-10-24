@@ -174,7 +174,8 @@ export interface IColumns {
   visibleTableField?: boolean; // default true
   orderDetailTable?: number; // default 9999
   orderDetailPanel? : number; // default 9999
-  sortable?: boolean; // default 9999
+  formatDatetime?: string; // default undefined
+  formatDecimal?: string; // default undefined
   hasWidth?: boolean; // default false
   myWidth?: number; // default undefined
   myMinwidth?: number; // default undefined

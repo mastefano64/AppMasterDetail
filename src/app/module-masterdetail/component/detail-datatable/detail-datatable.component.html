@@ -70,7 +70,15 @@
         {{ col.display }}
       </ng-template>
       <ng-template ngx-datatable-cell-template let-row="row">
-        {{ row[col.name] }}
+        <ng-container *ngIf="col.formatDatetime">
+          {{ row[col.name] | date: col.formatDatetime }}
+        </ng-container>
+        <ng-container *ngIf="col.formatDecimal">
+          {{ row[col.name] | number: col.formatDecimal }}
+        </ng-container>
+        <ng-container *ngIf="!col.formatDatetime && !col.formatDecimal">
+          {{ row[col.name] }}
+        </ng-container>
       </ng-template>
     </ngx-datatable-column>
 
@@ -79,7 +87,15 @@
         {{ col.display }}
       </ng-template>
       <ng-template ngx-datatable-cell-template let-row="row">
-        {{ row[col.name] }}
+        <ng-container *ngIf="col.formatDatetime">
+          {{ row[col.name] | date: col.formatDatetime }}
+        </ng-container>
+        <ng-container *ngIf="col.formatDecimal">
+          {{ row[col.name] | number: col.formatDecimal }}
+        </ng-container>
+        <ng-container *ngIf="!col.formatDatetime && !col.formatDecimal">
+          {{ row[col.name] }}
+        </ng-container>
       </ng-template>
     </ngx-datatable-column>
 
@@ -88,7 +104,15 @@
         {{ col.display }}
       </ng-template>
       <ng-template ngx-datatable-cell-template let-row="row">
-        {{ row[col.name] }}
+        <ng-container *ngIf="col.formatDatetime">
+          {{ row[col.name] | date: col.formatDatetime }}
+        </ng-container>
+        <ng-container *ngIf="col.formatDecimal">
+          {{ row[col.name] | number: col.formatDecimal }}
+        </ng-container>
+        <ng-container *ngIf="!col.formatDatetime && !col.formatDecimal">
+          {{ row[col.name] }}
+        </ng-container>
       </ng-template>
     </ngx-datatable-column>
 
@@ -97,7 +121,15 @@
         {{ col.display }}
       </ng-template>
       <ng-template ngx-datatable-cell-template let-row="row">
-        {{ row[col.name] }}
+        <ng-container *ngIf="col.formatDatetime">
+          {{ row[col.name] | date: col.formatDatetime }}
+        </ng-container>
+        <ng-container *ngIf="col.formatDecimal">
+          {{ row[col.name] | number: col.formatDecimal }}
+        </ng-container>
+        <ng-container *ngIf="!col.formatDatetime && !col.formatDecimal">
+          {{ row[col.name] }}
+        </ng-container>
       </ng-template>
     </ngx-datatable-column>
 

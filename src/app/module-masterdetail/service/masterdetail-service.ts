@@ -171,10 +171,15 @@ export class MasterDetailService {
       } else {
         col2.orderDetailPanel = col1.orderDetailPanel;
       }
-      if (col1.sortable === undefined) {
-        col2.sortable = true;
+      if (col1.formatDatetime) {
+        col2.formatDatetime = col1.formatDatetime;
       } else {
-        col2.sortable = col1.sortable;
+        col2.formatDatetime = undefined;
+      }
+      if (col1.formatDecimal) {
+        col2.formatDecimal = col1.formatDecimal;
+      } else {
+        col2.formatDecimal = undefined;
       }
       this.setColumnWith(col1, col2);
 

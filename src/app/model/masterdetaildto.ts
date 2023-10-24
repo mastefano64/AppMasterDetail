@@ -23,6 +23,8 @@ export class DetailDto {
   product: string;
   typedetail1: string;
   typedetail2: string;
+  dfieldD: Date;
+  dfieldN: number;
   dfield1: string;
   dfield2: string;
   dfield3: string;

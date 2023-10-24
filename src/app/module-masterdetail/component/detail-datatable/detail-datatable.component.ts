@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, Output, EventEmitter,
-      SimpleChanges, OnInit, OnChanges, OnDestroy} from '@angular/core';
+      SimpleChanges, OnInit, OnChanges, OnDestroy, ChangeDetectorRef} from '@angular/core';
 
 import { MasterDetailConfig, DetailTableColumnMode, EditField} from '../../masterdetailconfig';
 import { MasterDetailService } from '../../service/masterdetail-service';
@@ -77,6 +77,9 @@ export class DataTableComponent implements OnInit, OnChanges, OnDestroy {
       if (current && current.firstChange === false) {
         setTimeout(() => {
           this.recalculate();
+          if (current.currentValue === '-1') {
+            this.expandAllGroups();
+          }
         }, 1000);
       }
     }

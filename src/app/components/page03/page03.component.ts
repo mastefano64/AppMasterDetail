@@ -33,6 +33,8 @@ export class Page03Component implements OnInit {
     { name: 'masterId', display: 'MasterId', myMaxwidth: 100 },
     { name: 'name', display: 'Name' },
     { name: 'product', display: 'Product' },
+    { name: 'dfieldD', display: 'DfieldD', formatDatetime: 'd/M/yyyy' },
+    { name: 'dfieldN', display: 'DfieldN', formatDecimal: '1.0-1' },
     { name: 'dfield1', display: 'Dfield1' },
     { name: 'dfield2', display: 'Dfield2' },
     { name: 'dfield3', display: 'Dfield3' },

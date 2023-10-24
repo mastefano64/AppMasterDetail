@@ -143,7 +143,7 @@ export class ApiMasterDetailService {
     const md = new MasterDetailDto();
     md.master = master;
     md.master.masterId = id;
-    result.items.push(md);
+    result.items.push(md); // result.items.unshift(md);
     result.count = result.items.length;
     this.cacheresult = cloneDeep(result);
     //this.cacheresult = { ...result };
@@ -292,6 +292,16 @@ export class ApiMasterDetailService {
        //   d.typedetail2 = 'category4';
        // }
         d.typedetail2 = 'category3';
+        if(id % 2 === 0) {
+          d.dfieldD = new Date('2023-10-15');
+        } else {
+          d.dfieldD = new Date('2023-10-25');
+        }
+        if(id % 2 === 0) {
+          d.dfieldN = 10.15;
+        } else {
+          d.dfieldN = 20.25;
+        }
         d.dfield1 = `dfield1 ${im}/${id}`;
         d.dfield2 = `dfield2 ${im}/${id}`;
         d.dfield3 = `dfield3 ${im}/${id}`;
