@@ -8,6 +8,8 @@ import { EventDispatcher, IEvent } from '../events';
 import { QueryBackup } from './querybackup';
 //import { LoadingService } from '../service/loading.service';
 
+// version 2
+
 export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSource {
   private page = 0;
   private minpage = -1;
@@ -53,7 +55,7 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   get hasFirstPage(): boolean {
     let value = false;
-    if (this.page !== this.minpage) {
+    if (this.minpage !== -1 && this.page !== this.minpage) {
       value = true;
     }
     return value;
@@ -77,7 +79,7 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   get hasLastPage(): boolean {
     let value = false;
-    if (this.page !== this.maxpage) {
+    if (this.maxpage !== -1 && this.page !== this.maxpage) {
       value = true;
     }
     return value;
@@ -155,7 +157,7 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   gotoFirstPage(): boolean {
-    if (this.hasFirstPage === false) {
+    if (this.minpage === -1) {
       return false;
     }
     this.loadPaggedData(this.firstPage, this.pagesize, this.orderbycolumn, this.orderbydirection);
@@ -179,7 +181,7 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   gotoLastPage(): boolean {
-    if (this.hasLastPage === false) {
+    if (this.maxpage === -1) {
       return false;
     }
     this.loadPaggedData(this.lastPage, this.pagesize, this.orderbycolumn, this.orderbydirection);
@@ -194,7 +196,8 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   getPagingData(): PagingData {
-    const pd = new PagingData();
+    const pd = new PagingData(this);
+    pd.datetime = this.datetime;
     pd.page = this.page;
     pd.pagesize = this.pagesize;
     pd.minPage = this.minpage;
@@ -225,7 +228,8 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   private dispatchDataLoaded(): void {
-    const pd = new PagingData();
+    const pd = new PagingData(this);
+    pd.datetime = this.datetime;
     pd.page = this.page;
     pd.pagesize = this.pagesize;
     pd.minPage = this.minpage;

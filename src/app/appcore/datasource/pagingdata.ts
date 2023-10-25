@@ -1,5 +1,7 @@
 
 export class PagingData {
+  _datasource: any;
+  datetime: Date;
   page: number;
   pagesize: number;
   minPage: number;
@@ -10,7 +12,9 @@ export class PagingData {
   hasNextPage: boolean;
   hasLastPage: boolean;
 
-  constructor() {
+  constructor(datasource: any) {
+    this._datasource = datasource;
+    this.datetime = undefined;
     this.page = -1;
     this.pagesize = -1;
     this.minPage = -1;

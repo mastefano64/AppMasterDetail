@@ -93,7 +93,7 @@ export class Page11Component implements OnInit, OnDestroy {
     config.enableDetailTableEdit = true;
     config.detailTableColumnMode = 'force';
     config.detailTableExpansionType = 'default';
-    config.navbarStatusStyle = 'cellpage';
+    config.navbarStatusStyle = 'default'; // 'cellpage';
     config.navbarStatusCellPageSize = 'barsize7';
     config.panelMasterSideWidth = '500px';
     config.searchField = [ 'name', 'customer' ];

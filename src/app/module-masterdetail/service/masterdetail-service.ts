@@ -91,28 +91,16 @@ export class MasterDetailService {
 
   get hasFirstPage(): boolean {
     let value = false;
-    if (this.currentpage !== this.minpage) {
+    if (this.minpage !== -1 && this.currentpage !== this.minpage) {
       value = true;
     }
     return value;
-  }
-
-  get firstPage(): number {
-    return this.minpage;
   }
 
   get hasPrevPage(): boolean {
     let value = false;
     if (this.minpage !== -1 && this.currentpage > this.minpage) {
       value = true;
-    }
-    return value;
-  }
-
-  get prevPage(): number {
-    let value = -1;
-    if (this.minpage !== -1 && this.currentpage > this.minpage) {
-      value = this.currentpage - 1;
     }
     return value;
   }
@@ -125,18 +113,30 @@ export class MasterDetailService {
     return value;
   }
 
-  get nextPage(): number {
-    let value = -1;
-    if (this.maxpage !== -1 && this.currentpage < this.maxpage) {
-      value = this.currentpage + 1;
+  get hasLastPage(): boolean {
+    let value = false;
+    if (this.maxpage !== -1 && this.currentpage !== this.maxpage) {
+      value = true;
     }
     return value;
   }
 
-  get hasLastPage(): boolean {
-    let value = false;
-    if (this.currentpage !== this.maxpage) {
-      value = true;
+  get firstPage(): number {
+    return this.minpage;
+  }
+
+  get prevPage(): number {
+    let value = -1;
+    if (this.minpage !== -1 && this.currentpage > this.minpage) {
+      value = this.currentpage - 1;
+    }
+    return value;
+  }
+
+  get nextPage(): number {
+    let value = -1;
+    if (this.maxpage !== -1 && this.currentpage < this.maxpage) {
+      value = this.currentpage + 1;
     }
     return value;
   }
@@ -265,7 +265,7 @@ export class MasterDetailService {
     }
   }
 
-  startPagination(): any {
+  startPagination(): IMasterDetailDto {
     this.resetForChangePage();
     this.currentpage = this.startpage;
     this.currentrecord = this.datasource[this.currentpage];
@@ -274,9 +274,9 @@ export class MasterDetailService {
     return this.currentrecord;
   }
 
-  getFirstPage(): any {
+  getFirstPage(): IMasterDetailDto {
     this.resetForChangePage();
-    if (this.hasFirstPage === false) {
+    if (this.minpage === -1) {
       return undefined;
     }
     this.currentpage = this.firstPage;
@@ -286,7 +286,7 @@ export class MasterDetailService {
     return this.currentrecord;
   }
 
-  getPrevPage(): any {
+  getPrevPage(): IMasterDetailDto {
     this.resetForChangePage();
     if (this.hasPrevPage === false) {
       return undefined;
@@ -298,7 +298,7 @@ export class MasterDetailService {
     return this.currentrecord;
   }
 
-  getNextPage(): any {
+  getNextPage(): IMasterDetailDto {
     this.resetForChangePage();
     if (this.hasNextPage === false) {
       return undefined;
@@ -310,9 +310,9 @@ export class MasterDetailService {
     return this.currentrecord;
   }
 
-  getLastPage(): any {
+  getLastPage(): IMasterDetailDto {
     this.resetForChangePage();
-    if (this.hasLastPage === false) {
+    if (this.maxpage === -1) {
       return undefined;
     }
     this.currentpage = this.lastPage;
@@ -322,7 +322,7 @@ export class MasterDetailService {
     return this.currentrecord;
   }
 
-  goToPage(page: number, type = 'page'): any {
+  goToPage(page: number, type = 'page'): IMasterDetailDto {
     this.resetForChangePage();
     if (page >= this.minpage && page <= this.maxpage) {
       this.currentpage = page;

@@ -1,28 +1,31 @@
 <ng-container *ngIf="pagstatus">
-  <button mat-raised-button class="btnFirst" [color]="color" [disabled]="!hasFirstPage" (click)="onPagingFirst()">
-    {{ textfirst}}
-  </button>&nbsp;
-  <button mat-raised-button class="btnPrev" [color]="color" [disabled]="!hasPrevPage" (click)="onPagingPrev()">
-    {{ textprev}}
-  </button>&nbsp;
-  <ng-container *ngIf="paginationstyle === 'cellpage' && this.pagstatus">
-    <div class="navbarStatus">
-      <div class="navbarCells navbarCenter" *ngFor="let page of pages" (click)="onChangePage(page)">
-        <div class="navbarCellNum" [ngClass]="{ 'navbarCellsActive': currpage === page }">
-          {{ page + 1 }}
+  <!-- attachPropertyObject="pagstatus" is used only for cypress/test-->
+  <div [attachPropertyObject]="pagstatus" class="buttonPagination">
+    <button mat-raised-button class="btnFirst" [color]="color" [disabled]="!hasFirstPage" (click)="onPagingFirst()">
+      {{ textfirst}}
+    </button>&nbsp;
+    <button mat-raised-button class="btnPrev" [color]="color" [disabled]="!hasPrevPage" (click)="onPagingPrev()">
+      {{ textprev}}
+    </button>&nbsp;
+    <ng-container *ngIf="paginationstyle === 'cellpage' && this.pagstatus">
+      <div class="navbarStatus">
+        <div class="navbarCells navbarCenter" *ngFor="let page of pages" (click)="onChangePage(page)">
+          <div class="navbarCellNum" [ngClass]="{ 'navbarCellsActive': currpage === page }">
+            {{ page + 1 }}
+          </div>
         </div>
-      </div>
-    </div>&nbsp;
-  </ng-container>
-  <ng-container *ngIf="paginationstyle === 'default'">
-    <div class="navbarStatus">
-      {{ pagstatus.page + 1 }} {{ textof }} {{ pagstatus.maxPage + 1 }}
-    </div>&nbsp;
-  </ng-container>
-  <button mat-raised-button class="btnNext" [color]="color" [disabled]="!hasNextPage" (click)="onPagingNext()">
-    {{ textnext}}
-  </button>&nbsp;
-  <button mat-raised-button class="btnLast" [color]="color" [disabled]="!hasLastPage" (click)="onPagingLast()">
-    {{ textlast}}
-  </button>&nbsp;
+      </div>&nbsp;
+    </ng-container>
+    <ng-container *ngIf="paginationstyle === 'default'">
+      <div class="navbarStatus">
+        {{ pagstatus.page + 1 }} {{ textof }} {{ pagstatus.maxPage + 1 }}
+      </div>&nbsp;
+    </ng-container>
+    <button mat-raised-button class="btnNext" [color]="color" [disabled]="!hasNextPage" (click)="onPagingNext()">
+      {{ textnext}}
+    </button>&nbsp;
+    <button mat-raised-button class="btnLast" [color]="color" [disabled]="!hasLastPage" (click)="onPagingLast()">
+      {{ textlast}}
+    </button>&nbsp;
+  </div>
 </ng-container>

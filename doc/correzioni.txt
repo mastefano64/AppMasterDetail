@@ -1,3 +1,0 @@
-1) Lista side prende la dimensione del detail presente nel momento in cui viene aperto
-
-2) list side non si vede se non ci sono details

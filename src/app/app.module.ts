@@ -28,6 +28,7 @@ import { FormDetailCreateComponent } from './components/form-detail-create/form-
 import { FormDetailEditComponent } from './components/form-detail-edit/form-detail-edit.component';
 import { DetailCustom1Component } from './components/detailcustom1/detail-custom1.component';
 import { DetailCustom2Component } from './components/detailcustom2/detail-custom2.component';
+import { AttachPropertyObjectDirective } from './directive/attach-property-object.directive';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { DetailCustom2Component } from './components/detailcustom2/detail-custom
     FormDetailCreateComponent,
     FormDetailEditComponent,
     DetailCustom1Component,
-    DetailCustom2Component
+    DetailCustom2Component,
+    AttachPropertyObjectDirective
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ describe('page02 - example1a', () => {
     cy.get('.panelDetail .datatable-row-wrapper').children().should('have.length', 10);
     cy.get('.panelDetail .datatable-row-wrapper').children().first().should('contain', 'dfield1 1/1');
     cy.get('.panelDetail .datatable-row-wrapper').children().last().should('contain', 'dfield1 1/10');
-    // end start page
+    // end start page 2
 
     // begin page next 2
     cy.get('.panelMaster .panelNavbar1 .btnNext').click();

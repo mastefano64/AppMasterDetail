@@ -6,7 +6,9 @@ import { catchError, finalize } from 'rxjs/operators';
 import { PagingData } from './pagingdata';
 import { EventDispatcher, IEvent } from '../events';
 import { QueryBackup } from './querybackup';
-import { LoadingService } from '../service/loading.service';
+//import { LoadingService } from '../service/loading.service';
+
+// version 2
 
 export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSource {
   private page = 0;
@@ -15,7 +17,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
   private pagesize = 25;
   private orderbycolumn = '';
   private orderbydirection = '';
-  private loadingservice = inject(LoadingService);
+  //private loadingservice = inject(LoadingService);
   private responseSubject = new BehaviorSubject<K[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$ = this.loadingSubject.asObservable();
@@ -53,7 +55,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   get hasFirstPage(): boolean {
     let value = false;
-    if (this.page !== this.minpage) {
+    if (this.minpage !== -1 && this.page !== this.minpage) {
       value = true;
     }
     return value;
@@ -77,7 +79,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   get hasLastPage(): boolean {
     let value = false;
-    if (this.page !== this.maxpage) {
+    if (this.maxpage !== -1 && this.page !== this.maxpage) {
       value = true;
     }
     return value;
@@ -141,7 +143,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   gotoFirstPage(): boolean {
-    if (this.hasFirstPage === false) {
+    if (this.minpage === -1) {
       return false;
     }
     this.goToPage(this.firstPage);
@@ -165,7 +167,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   gotoLastPage(): boolean {
-    if (this.hasLastPage === false) {
+    if (this.maxpage === -1) {
       return false;
     }
     this.goToPage(this.lastPage);
@@ -187,7 +189,8 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   getPagingData(): PagingData {
-    const pd = new PagingData();
+    const pd = new PagingData(this);
+    pd.datetime = this.datetime;
     pd.page = this.page;
     pd.pagesize = this.pagesize;
     pd.minPage = this.minpage;
@@ -218,7 +221,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
   }
 
   private dispatchDataLoaded(): void {
-    const pd = new PagingData();
+    const pd = new PagingData(this);
     pd.page = this.page;
     pd.minPage = this.minpage;
     pd.maxPage = this.maxpage;
