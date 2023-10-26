@@ -3,7 +3,7 @@ import { PagingData } from '../../src/app/appcore/datasource/pagingdata';
 // https://stackoverflow.com/questions/43430558/how-can-i-bind-data-to-the-html-attribute-in-angular4
 // $( "div" ).data( "test", { first: 16, last: "pizza!" } );
 
-describe('FoormEdit - page03', () => {
+describe('FoormEditDetail - page03', () => {
   before(() => {
 
   })
@@ -12,11 +12,11 @@ describe('FoormEdit - page03', () => {
     cy.visit('http://localhost:4200/page03');
     cy.contains('page03 - example1c');
 
-    // begin page page 2 - add details
+    // begin page 2 - add details
     cy.log('begin page next 2');
     cy.get('.panelMaster .navbarStatus').children().eq(2).contains(3);
     cy.get('.panelMaster .navbarStatus').find('.navbarCells').eq(2).click();
-    // end page page 2 - add details
+    // end page 2 - add details
 
     // begin change view
     cy.log('begin change view');
@@ -98,11 +98,11 @@ describe('FoormEdit - page03', () => {
     cy.visit('http://localhost:4200/page03');
     cy.contains('page03 - example1c');
 
-    // begin page page 2 - add details
+    // begin page 2 - add details
     cy.log('begin page next 2');
     cy.get('.panelMaster .navbarStatus').children().eq(2).contains(3);
     cy.get('.panelMaster .navbarStatus').find('.navbarCells').eq(2).click();
-    // end page page 2 - add details
+    // end page 2 - add details
 
     // begin change view
     cy.log('begin change view');

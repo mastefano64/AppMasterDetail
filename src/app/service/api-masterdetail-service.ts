@@ -113,6 +113,7 @@ export class ApiMasterDetailService {
   }
 
   getMasterDetailMany(fromcache: boolean): Observable<object> {
+    console.log(1);
     if (this.cacheresult && fromcache == true) {
       return of(this.cacheresult).pipe( delay(300) );
     }
