@@ -8,6 +8,7 @@ describe('page03 - example1a', () => {
     cy.contains('page03 - example1c');
 
     // begin start page 1 - card
+    cy.log('begin start page 1 - card');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.disabled');
@@ -25,6 +26,7 @@ describe('page03 - example1a', () => {
     // end start page
 
     // begin start page 1 -table
+    cy.log('begin start page 1 -table');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Table').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
@@ -42,7 +44,8 @@ describe('page03 - example1a', () => {
     cy.get('.panelDetail .datatable-row-wrapper').children().last().should('contain', 'dfield1 1/10');
     // end start page 1 -table
 
-    // begin start page 1 -card
+    // begin start page 1 - card
+    cy.log('begin start page 1 - card');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Table').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
@@ -67,6 +70,7 @@ describe('page03 - example1a', () => {
     cy.contains('page03 - example1c');
 
     // begin start page 1
+    cy.log('begin start page 1');
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 1');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
@@ -87,6 +91,7 @@ describe('page03 - example1a', () => {
     // end start page 1
 
     // begin start page 2
+    cy.log('begin start page 2');
     cy.get('.panelMaster .navbarStatus').children().eq(1).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 2');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -108,6 +113,7 @@ describe('page03 - example1a', () => {
     // end start page 2
 
     // begin start page 3
+    cy.log('begin start page 3');
     cy.get('.panelMaster .navbarStatus').children().eq(2).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 3');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -129,6 +135,7 @@ describe('page03 - example1a', () => {
     // end start page 3
 
     // begin start page 4
+    cy.log('begin start page 4');
     cy.get('.panelMaster .navbarStatus').children().eq(3).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 4');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -150,6 +157,7 @@ describe('page03 - example1a', () => {
     // end start page 4
 
     // begin start page 5
+    cy.log('begin start page 5');
     cy.get('.panelMaster .navbarStatus').children().eq(4).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 5');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -171,6 +179,7 @@ describe('page03 - example1a', () => {
     // end start page 5
 
     // begin start page 99
+    cy.log('begin start page 99');
     cy.get('.panelMaster .panelNavbar1 .btnLast').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 99');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -192,6 +201,7 @@ describe('page03 - example1a', () => {
     // end start page 99
 
     // begin start page 98
+    cy.log('begin start page 98');
     cy.get('.panelMaster .navbarStatus').children().eq(3).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 98');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -213,6 +223,7 @@ describe('page03 - example1a', () => {
     // end start page 98
 
     // begin start page 97
+    cy.log('begin start page 97');
     cy.get('.panelMaster .navbarStatus').children().eq(2).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 97');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -234,6 +245,7 @@ describe('page03 - example1a', () => {
     // end start page 97
 
     // begin start page 96
+    cy.log('begin start page 96');
     cy.get('.panelMaster .navbarStatus').children().eq(1).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 96');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -255,6 +267,7 @@ describe('page03 - example1a', () => {
     // end start page 96
 
     // begin start page 95
+    cy.log('begin start page 95');
     cy.get('.panelMaster .navbarStatus').children().eq(0).find('.navbarCellNum').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 95');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -276,6 +289,7 @@ describe('page03 - example1a', () => {
     // end start page 95
 
     // begin start page 1
+    cy.log('begin start page 1');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').click();
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 1');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
@@ -302,6 +316,7 @@ describe('page03 - example1a', () => {
     cy.contains('page03 - example1c');
 
     // begin start page 1
+    cy.log('begin start page 1');
     cy.get('.panelMaster .panelMasterField').should('contain', 'mfield1 1');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
@@ -322,6 +337,7 @@ describe('page03 - example1a', () => {
     // end start page 1
 
     // begin menu
+    cy.log('begin menu');
     cy.get('.panelMaster .panelNavbarSx .btnMenu').should('contain', 'menu');
     cy.get('.panelMaster .panelNavbarSx .btnMenu').click();
 
@@ -351,6 +367,7 @@ describe('page03 - example1a', () => {
     // end menu
 
     // begin click menu 3
+    cy.log('begin click menu 3');
     cy.get('.panelMasterListSide .inputsearch input').clear();
     cy.get('.panelMasterListSide .inputsearch input').type(' ');
     cy.get('.panelMasterListSide .listSideMaster').children().should('have.length', 99);
@@ -366,6 +383,7 @@ describe('page03 - example1a', () => {
     // end click menu 3
 
     // begin click menu 4
+    cy.log('begin click menu 4');
     cy.get('.panelMasterListSide .inputsearch input').clear();
     cy.get('.panelMasterListSide .inputsearch input').type(' ');
     cy.get('.panelMasterListSide .listSideMaster').children().should('have.length', 99);
@@ -381,6 +399,7 @@ describe('page03 - example1a', () => {
     // end click menu 4
 
     // begin click menu 1
+    cy.log('begin click menu 1');
     cy.get('.panelMasterListSide .inputsearch input').clear();
     cy.get('.panelMasterListSide .inputsearch input').type(' ');
     cy.get('.panelMasterListSide .listSideMaster').children().should('have.length', 99);

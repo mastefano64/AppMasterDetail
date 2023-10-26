@@ -21,6 +21,7 @@ describe('MasterDetailService', () => {
       url: ''
     }
 
+    cy.log('step 1');
     expect(s.currentPage).to.equal(0);
     expect(s.minPage).to.equal(-1);
     expect(s.maxPage).to.equal(-1);
@@ -35,6 +36,7 @@ describe('MasterDetailService', () => {
     expect(s.hasNextPage).to.equal(false);
     expect(s.hasLastPage).to.equal(false);
 
+    cy.log('step 2');
     s.setConfig(config);
     s.setDataSource(result);
 
@@ -52,6 +54,7 @@ describe('MasterDetailService', () => {
     expect(s.hasNextPage).to.equal(true);
     expect(s.hasLastPage).to.equal(true);
 
+    cy.log('step 3');
     const first1 = s.getFirstPage();
     expect(s.currentPage).to.equal(0);
     expect(s.minPage).to.equal(0);
@@ -68,6 +71,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(first1.master.name).to.equal('name 1');
 
+    cy.log('step 4');
     const next1 = s.getNextPage();
     expect(s.currentPage).to.equal(1);
     expect(s.minPage).to.equal(0);
@@ -84,6 +88,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(next1.master.name).to.equal('name 2');
 
+    cy.log('step 5');
     const next2 = s.getNextPage();
     expect(s.currentPage).to.equal(2);
     expect(s.minPage).to.equal(0);
@@ -100,6 +105,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(next2.master.name).to.equal('name 3');
 
+    cy.log('step 6');
     const last = s.getLastPage();
     expect(s.currentPage).to.equal(98);
     expect(s.minPage).to.equal(0);
@@ -116,6 +122,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(false);
     expect(last.master.name).to.equal('name 99');
 
+    cy.log('step 7');
     const prev1 = s.getPrevPage();
     expect(s.currentPage).to.equal(97);
     expect(s.minPage).to.equal(0);
@@ -132,6 +139,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(prev1.master.name).to.equal('name 98');
 
+    cy.log('step 8');
     const prev2 = s.getPrevPage();
     expect(s.currentPage).to.equal(96);
     expect(s.minPage).to.equal(0);
@@ -148,6 +156,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(prev2.master.name).to.equal('name 97');
 
+    cy.log('step 9');
     const first2 = s.getFirstPage();
     expect(s.currentPage).to.equal(0);
     expect(s.minPage).to.equal(0);
@@ -164,6 +173,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(first2.master.name).to.equal('name 1');
 
+    cy.log('step 10');
     const next3 = s.getNextPage();
     expect(s.currentPage).to.equal(1);
     expect(s.minPage).to.equal(0);
@@ -195,6 +205,7 @@ describe('MasterDetailService', () => {
       url: ''
     }
 
+    cy.log('step 1');
     s.setConfig(config);
     s.setDataSource(result);
 
@@ -212,6 +223,7 @@ describe('MasterDetailService', () => {
     expect(s.hasNextPage).to.equal(true);
     expect(s.hasLastPage).to.equal(true);
 
+    cy.log('step 2');
     const page2 = s.goToPage(2);
     expect(s.currentPage).to.equal(2);
     expect(s.minPage).to.equal(0);
@@ -228,6 +240,7 @@ describe('MasterDetailService', () => {
     expect(s.hasLastPage).to.equal(true);
     expect(page2.master.name).to.equal('name 3');
 
+    cy.log('step 3');
     const page4 = s.goToPage(4);
     expect(s.currentPage).to.equal(4);
     expect(s.minPage).to.equal(0);

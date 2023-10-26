@@ -8,6 +8,7 @@ describe('page06 - example1f', () => {
     cy.contains('page06 - example1f');
 
     // begin start page 1 - card
+    cy.log('begin start page 1 - card');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.disabled');
@@ -25,13 +26,14 @@ describe('page06 - example1f', () => {
     // end start page
 
     // begin change view and page
+    cy.log('begin change view and page');
     cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Card').click();
     cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Table').click();
     cy.get('.panelMaster .panelNavbar1 .btnNext').click();
-
     // end change view and page
 
     // begin start page 2 - table
+    cy.log('begin start page 2 - table');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -52,6 +54,7 @@ describe('page06 - example1f', () => {
     // end start page
 
     // begin change Typedetail1
+    cy.log('begin change Typedetail1');
     cy.get('.panelMaster .panelNavbarCx .selectGroup').click().get('mat-option').contains('Typedetail1').click();
     cy.get('.panelDetail .datatable-body-row').should('have.length', 0);
     cy.get('.panelDetail .tableGroupExpand').should('contain', 'Expand all').and('contain', 'Collapse all');
@@ -66,6 +69,7 @@ describe('page06 - example1f', () => {
     // end start page
 
     // begin change Typedetail2
+    cy.log('begin change Typedetail2');
     cy.get('.panelMaster .panelNavbarCx .selectGroup').click().get('mat-option').contains('Typedetail2').click();
     cy.get('.panelDetail .datatable-body-row').should('have.length', 0);
     cy.get('.panelDetail .tableGroupExpand').should('contain', 'Expand all').and('contain', 'Collapse all');
@@ -77,9 +81,5 @@ describe('page06 - example1f', () => {
     cy.get('.panelDetail .datatable-body-row').eq(1).should('contain', 'name 2').and('contain', 'category1');
     cy.get('.panelDetail .datatable-body-row').eq(8).should('contain', 'name 9').and('contain', 'category2');
     // end start page
-
-
   })
-
-
 })

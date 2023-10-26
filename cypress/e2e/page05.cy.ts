@@ -8,6 +8,7 @@ describe('page05 - example1d', () => {
     cy.contains('page05 - example1e');
 
     // begin start page 1 - card
+    cy.log('begin start page 1 - card');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.disabled');
@@ -24,6 +25,7 @@ describe('page05 - example1d', () => {
     // end start page
 
     // begin start page 1 - table
+    cy.log('begin start page 1 - table');
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
     cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Table').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
@@ -41,6 +43,7 @@ describe('page05 - example1d', () => {
     // end start page 1 -table
 
     // begin open table extension panel
+    cy.log('begin open table extension panel');
     //cy.get('.panelDetail .datatable-row-wrapper').children().eq(3).find('.tableExpansionAnchor').click();
     //cy.get('.panelDetail .datatable-row-wrapper').children().eq(3).find('.datatable-row-detail').should('exist');
     cy.get('.panelDetail .datatable-row-wrapper').eq(3).find('.tableExpansionAnchor').click();
@@ -48,6 +51,7 @@ describe('page05 - example1d', () => {
     // end sopen table extension panel
 
      // begin change view
+     cy.log('begin change view');
      cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Card').click();
      cy.get('.panelMaster .panelNavbarDx .selectView').find('.mat-button-toggle-button').contains('Table').click();
      // end change view
@@ -59,6 +63,4 @@ describe('page05 - example1d', () => {
     cy.get('.panelDetail .datatable-row-wrapper').eq(5).find('.datatable-row-detail').contains('dfield3 1/6');
     // end sopen table extension panel
   })
-
-
 })

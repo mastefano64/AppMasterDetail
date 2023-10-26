@@ -8,6 +8,7 @@ describe('page02 - example1a', () => {
     cy.contains('page02 - example1b');
 
     // begin start page 1
+    cy.log('begin start page 1');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnNext').should('be.enabled');
@@ -25,6 +26,7 @@ describe('page02 - example1a', () => {
     // end start page 2
 
     // begin page next 2
+    cy.log('begin page next 2');
     cy.get('.panelMaster .panelNavbar1 .btnNext').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -43,6 +45,7 @@ describe('page02 - example1a', () => {
     // end page next 2
 
     // begin page next 3
+    cy.log('begin page next 3');
     cy.get('.panelMaster .panelNavbar1 .btnNext').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -61,6 +64,7 @@ describe('page02 - example1a', () => {
     // end page next 3
 
     // begin page last 99
+    cy.log('begin page last 99');
     cy.get('.panelMaster .panelNavbar1 .btnLast').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -79,6 +83,7 @@ describe('page02 - example1a', () => {
     // end page last 99
 
     // begin page prev 98
+    cy.log('begin page last 98');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -97,6 +102,7 @@ describe('page02 - example1a', () => {
     // end page prev 98
 
     // begin page prev 97
+    cy.log('begin page last 97');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');
@@ -115,6 +121,7 @@ describe('page02 - example1a', () => {
     // end page prev 97
 
     // begin page first 1
+    cy.log('begin page first 1');
     cy.get('.panelMaster .panelNavbar1 .btnFirst').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.disabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.disabled');
@@ -133,6 +140,7 @@ describe('page02 - example1a', () => {
     // end page first 1
 
     // begin page next 2
+    cy.log('begin page next 2');
     cy.get('.panelMaster .panelNavbar1 .btnNext').click();
     cy.get('.panelMaster .panelNavbar1 .btnFirst').should('be.enabled');
     cy.get('.panelMaster .panelNavbar1 .btnPrev').should('be.enabled');

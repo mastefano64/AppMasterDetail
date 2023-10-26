@@ -16,6 +16,7 @@ describe('page11 - example2h', () => {
     cy.get('.panelMaster .panelNavbarDx .selectView').should('exist');
 
     // begin start page 1
+    cy.log('begin start page 1');
     cy.get('.buttonPagination .btnFirst').should('be.disabled');
     cy.get('.buttonPagination .btnPrev').should('be.disabled');
     cy.get('.buttonPagination .btnNext').should('be.enabled');
@@ -46,6 +47,7 @@ describe('page11 - example2h', () => {
     // end start page 1
 
     // begin page next 2
+    cy.log('begin page next 2');
     cy.get('.buttonPagination .btnNext').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
@@ -76,6 +78,7 @@ describe('page11 - example2h', () => {
     // end page next 2
 
     // begin page next 3
+    cy.log('begin page next 3');
     cy.get('.buttonPagination .btnNext').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
@@ -106,6 +109,7 @@ describe('page11 - example2h', () => {
     // end page next 3
 
     // begin page last 99
+    cy.log('begin page last 99');
     cy.get('.buttonPagination .btnLast').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
@@ -136,6 +140,7 @@ describe('page11 - example2h', () => {
     // end page last 99
 
     // begin page prev 98
+    cy.log('begin page last 98');
     cy.get('.buttonPagination .btnPrev').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
@@ -166,6 +171,7 @@ describe('page11 - example2h', () => {
     // end page prev 98
 
     // begin page prev 97
+    cy.log('begin page last 97');
     cy.get('.buttonPagination .btnPrev').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
@@ -196,6 +202,7 @@ describe('page11 - example2h', () => {
     // end page prev 97
 
     // begin page first 1
+    cy.log('begin page first 1');
     cy.get('.buttonPagination .btnFirst').click();
     cy.get('.buttonPagination .btnFirst').should('be.disabled');
     cy.get('.buttonPagination .btnPrev').should('be.disabled');
@@ -226,6 +233,7 @@ describe('page11 - example2h', () => {
     // end page first 1
 
     // begin page next 2
+    cy.log('begin page next 2');
     cy.get('.buttonPagination .btnNext').click();
     cy.get('.buttonPagination .btnFirst').should('be.enabled');
     cy.get('.buttonPagination .btnPrev').should('be.enabled');
