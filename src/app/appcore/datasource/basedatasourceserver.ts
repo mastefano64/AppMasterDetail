@@ -53,6 +53,14 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   //
 
+  get minPage(): number {
+    return this.minpage;
+  }
+
+  get maxPage(): number {
+    return this.maxpage;
+  }
+
   get hasFirstPage(): boolean {
     let value = false;
     if (this.minpage !== -1 && this.page !== this.minpage) {
@@ -109,6 +117,14 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
     return this.maxpage;
   }
 
+  get currentDateTime(): Date {
+    return this.datetime;
+  }
+
+  get currentResult(): any {
+    return this.result;
+  }
+
   //
 
   get onDataLoaded(): IEvent<BaseDataSourceServer<J, K, Z>, any> {
@@ -136,8 +152,8 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
       this.orderbycolumn = orderbycolumn;
       this.setPageCount(response.count);
       this.result = response;
-      this.responseSubject.next(response.items);
       this.datetime = new Date();
+      this.responseSubject.next(response.items);
       this.dispatchDataLoaded();
     });
   }

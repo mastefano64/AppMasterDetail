@@ -53,6 +53,14 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   //
 
+  get minPage(): number {
+    return this.minpage;
+  }
+
+  get maxPage(): number {
+    return this.maxpage;
+  }
+
   get hasFirstPage(): boolean {
     let value = false;
     if (this.minpage !== -1 && this.page !== this.minpage) {
@@ -107,6 +115,14 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   get lastPage(): number {
     return this.maxpage;
+  }
+
+  get currentDateTime(): Date {
+    return this.datetime;
+  }
+
+  get currentResult(): any {
+    return this.result;
   }
 
   //

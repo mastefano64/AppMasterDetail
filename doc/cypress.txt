@@ -1,4 +1,8 @@
 
+https://dev.to/this-is-angular/angular-testing-in-2023-past-present-and-future-j5m
+https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma
+https://medium.com/simform-engineering/how-to-write-unit-tests-with-jasmine-karma-f1908bdeb617
+
 https://docs.cypress.io/guides/core-concepts/introduction-to-cypress
 https://docs.cypress.io/guides/core-concepts/interacting-with-elements
 

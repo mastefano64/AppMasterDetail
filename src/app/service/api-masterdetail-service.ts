@@ -4,9 +4,9 @@ import { Observable, delay, of } from "rxjs";
 
 import { MasterDetailDto, MasterDto, DetailDto } from "../model/masterdetaildto";
 import { IResult } from "../module-masterdetail/interface/type-interface";
-import { cloneDeep } from 'lodash-es';
 import { MasterDetailSearch } from "../model/masterdetailsearch";
 import { Utility } from "../appcore/utility";
+import { cloneDeep } from 'lodash-es';
 
 // export interface IResult {
 //   count: number,
