@@ -230,31 +230,32 @@ describe('DataSourceServer', () => {
     console.log(mds.currentDateTime);
     console.log(currentItem);
 
-    // go to page 3
-    // const retl = mds.gotoToPage(3);
-    // await sleep(1000);
+    // page refresh
+    const retx = mds.refresh();
+    await sleep(1000);
 
-    // currentResult = mds.currentResult;
-    // currentItem = currentResult.items[0];
-    // expect(retl).toEqual(true);
-    // expect(mds.currentPage).toEqual(4);
-    // expect(mds.pageSize).toEqual(20);
-    // expect(mds.orderbyColumn).toEqual('masterId');
-    // expect(mds.orderbyDirection).toEqual('asc');
-    // expect(mds.minPage).toEqual(0);
-    // expect(mds.maxPage).toEqual(4);
-    // expect(mds.hasFirstPage).toEqual(true);
-    // expect(mds.hasPrevPage).toEqual(true);
-    // expect(mds.hasNextPage).toEqual(false);
-    // expect(mds.hasLastPage).toEqual(false);
-    // expect(mds.firstPage).toEqual(0);
-    // expect(mds.prevPage).toEqual(3);
-    // expect(mds.nextPage).toEqual(-1);
-    // expect(mds.lastPage).toEqual(4);
-    // expect(lastDateTime).not.toEqual(mds.currentDateTime);
-    // expect(currentItem.master.name).toEqual('name 81');
-    // lastDateTime = mds.currentDateTime;
-    // console.log(currentItem);
+    currentResult = mds.currentResult;
+    currentItem = currentResult.items[0];
+    //expect(retx).toEqual(true);
+    expect(mds.currentPage).toEqual(4);
+    expect(mds.pageSize).toEqual(20);
+    expect(mds.orderbyColumn).toEqual('masterId');
+    expect(mds.orderbyDirection).toEqual('asc');
+    expect(mds.minPage).toEqual(0);
+    expect(mds.maxPage).toEqual(4);
+    expect(mds.hasFirstPage).toEqual(true);
+    expect(mds.hasPrevPage).toEqual(true);
+    expect(mds.hasNextPage).toEqual(false);
+    expect(mds.hasLastPage).toEqual(false);
+    expect(mds.firstPage).toEqual(0);
+    expect(mds.prevPage).toEqual(3);
+    expect(mds.nextPage).toEqual(-1);
+    expect(mds.lastPage).toEqual(4);
+    expect(lastDateTime).not.toEqual(mds.currentDateTime);
+    expect(currentItem.master.name).toEqual('name 81');
+    lastDateTime = mds.currentDateTime;
+    console.log(mds.currentDateTime);
+    console.log(currentItem);
   });
 
   function sleep(ms) {

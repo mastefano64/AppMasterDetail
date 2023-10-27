@@ -146,7 +146,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
       }),
       finalize(() => this.loadingSubject.next(false))
     ).subscribe((response: { count: number; }) => {
-      this.page = 0;
+      this.page = 0; // refresh ???
       this.pagesize = pagesize;
       this.orderbydirection = orderbydirection;
       this.orderbycolumn = orderbycolumn;
