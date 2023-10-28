@@ -8,7 +8,7 @@ import { EventDispatcher, IEvent } from '../events';
 import { QueryBackup } from './querybackup';
 //import { LoadingService } from '../service/loading.service';
 
-// version 2
+// version 3
 
 export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSource {
   private page = 0;
