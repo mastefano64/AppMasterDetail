@@ -197,6 +197,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
 
   goToPage(index: number): void {
     if (this.minpage === -1 && this.maxpage === -1 && index < this.maxpage) {
+      this.responseSubject.next([]);
       return;
     }
     this.page = index;
