@@ -42,7 +42,8 @@ describe('DataSourceClient', () => {
     expect(mds.lastPage).toEqual(-1);
 
     // page 1
-    await mds.loadPaggedData(pagesize, 'masterId');
+    currpage = 0;
+    await mds.loadPaggedData(currpage, pagesize, 'masterId');
     //await sleep(1000);
 
     currentResult = mds.currentResult;

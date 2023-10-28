@@ -191,6 +191,16 @@ export class BaseDataSourceServer<J, K, Z> implements DataSource<K>, IBaseDataSo
     return this.loadPaggedData(this.lastPage, this.pagesize, this.orderbycolumn, this.orderbydirection);
   }
 
+  // goToPage(index: number): void {
+  //   if (this.minpage === -1 && this.maxpage === -1 && index < this.maxpage) {
+  //     return;
+  //   }
+  //   this.page = index;
+  //   const skip = this.page * this.pagesize;
+  //   const pagged = this.result.items.slice(skip, skip + this.pagesize);
+  //   this.responseSubject.next([ ...pagged ]);
+  // }
+
   refresh(): Promise<boolean> {
     if (this.minpage === -1 && this.maxpage === -1) {
       return Promise.reject(false);

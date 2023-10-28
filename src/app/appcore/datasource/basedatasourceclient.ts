@@ -135,7 +135,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
     return QueryBackup.backup(this.search, this.page, this.pagesize, this.orderbycolumn, this.orderbydirection);
   }
 
-    loadPaggedData(pagesize: number, orderbycolumn: string, orderbydirection = 'asc', isrefresh = false): Promise<boolean> {
+  loadPaggedData(page: number, pagesize: number, orderbycolumn: string, orderbydirection = 'asc'): Promise<boolean> {
     const promise = new Promise<boolean>((resolve, reject) => {
       this.loadingSubject.next(true);
 
@@ -148,8 +148,7 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
         }),
         finalize(() => this.loadingSubject.next(false))
       ).subscribe((response: { count: number; }) => {
-        //this.page = 0; // refresh ???
-        this.page = (isrefresh === true) ? this.page : 0;
+        this.page = this.page;
         this.pagesize = pagesize;
         this.orderbydirection = orderbydirection;
         this.orderbycolumn = orderbycolumn;
@@ -162,13 +161,6 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
       });
     });
     return promise;
-  }
-
-  refresh(): Promise<boolean> {
-    if (this.minpage === -1 && this.maxpage === -1) {
-      return Promise.reject(false);
-    }
-    return this.loadPaggedData(this.pagesize, this.orderbycolumn, this.orderbydirection, true);
   }
 
   gotoFirstPage(): boolean {
@@ -203,11 +195,21 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
     return true;
   }
 
-  goToPage(index: number) {
+  goToPage(index: number): void {
+    if (this.minpage === -1 && this.maxpage === -1 && index < this.maxpage) {
+      return;
+    }
     this.page = index;
     const skip = this.page * this.pagesize;
     const pagged = this.result.items.slice(skip, skip + this.pagesize);
     this.responseSubject.next([ ...pagged ]);
+  }
+
+  refresh(): Promise<boolean> {
+    if (this.minpage === -1 && this.maxpage === -1) {
+      return Promise.reject(false);
+    }
+    return this.loadPaggedData(this.page, this.pagesize, this.orderbycolumn, this.orderbydirection);
   }
 
   getPagingData(): PagingData {
@@ -278,7 +280,7 @@ export interface IBaseDataSource {
   prevPage: number;
   nextPage: number;
   lastPage: number;
-  loadPaggedData(pagesize: number, orderbycolumn: string, orderbydirection: string): Promise<boolean>;
+  loadPaggedData(page: number, pagesize: number, orderbycolumn: string, orderbydirection: string): Promise<boolean>;
   gotoFirstPage(): boolean;
   gotoPrevPage(): boolean;
   gotoNextPage(): boolean;
