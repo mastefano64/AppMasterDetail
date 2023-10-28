@@ -135,27 +135,40 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
     return QueryBackup.backup(this.search, this.page, this.pagesize, this.orderbycolumn, this.orderbydirection);
   }
 
-  loadPaggedData(page: number, pagesize: number, orderbycolumn: string, orderbydirection = 'asc'): void {
-    this.loadingSubject.next(true);
+    loadPaggedData(pagesize: number, orderbycolumn: string, orderbydirection = 'asc', isrefresh = false): Promise<boolean> {
+    const promise = new Promise<boolean>((resolve, reject) => {
+      this.loadingSubject.next(true);
 
-    (this.service as any).fetchAllData(this.search, orderbycolumn, orderbydirection).pipe(
-      catchError((e) =>  {
-        //this.loadingservice?.resetLoading();
-        alert('Si è verifcato un problema oppure non hai i permesso necessati!');
-        return of([]);
-      }),
-      finalize(() => this.loadingSubject.next(false))
-    ).subscribe((response: { count: number; }) => {
-      this.page = 0; // refresh ???
-      this.pagesize = pagesize;
-      this.orderbydirection = orderbydirection;
-      this.orderbycolumn = orderbycolumn;
-      this.setPageCount(response.count);
-      this.result = response;
-      this.goToPage(this.page);
-      this.datetime = new Date();
-      this.dispatchDataLoaded();
+      (this.service as any).fetchAllData(this.search, orderbycolumn, orderbydirection).pipe(
+        catchError((e) => {
+          //this.loadingservice?.resetLoading();
+          alert('Si è verifcato un problema oppure non hai i permesso necessati!');
+          reject(false);
+          return of([]);
+        }),
+        finalize(() => this.loadingSubject.next(false))
+      ).subscribe((response: { count: number; }) => {
+        //this.page = 0; // refresh ???
+        this.page = (isrefresh === true) ? this.page : 0;
+        this.pagesize = pagesize;
+        this.orderbydirection = orderbydirection;
+        this.orderbycolumn = orderbycolumn;
+        this.setPageCount(response.count);
+        this.result = response;
+        this.goToPage(this.page);
+        this.datetime = new Date();
+        this.dispatchDataLoaded();
+        resolve(true);
+      });
     });
+    return promise;
+  }
+
+  refresh(): Promise<boolean> {
+    if (this.minpage === -1 && this.maxpage === -1) {
+      return Promise.reject(false);
+    }
+    return this.loadPaggedData(this.pagesize, this.orderbycolumn, this.orderbydirection, true);
   }
 
   gotoFirstPage(): boolean {
@@ -188,13 +201,6 @@ export class BaseDataSourceClient<J, K, Z> implements DataSource<K>, IBaseDataSo
     }
     this.goToPage(this.lastPage);
     return true;
-  }
-
-  refresh(): void {
-    if (this.minpage === -1 && this.maxpage === -1) {
-      return;
-    }
-    this.loadPaggedData(this.page, this.pagesize, this.orderbycolumn, this.orderbydirection);
   }
 
   goToPage(index: number) {
@@ -272,10 +278,11 @@ export interface IBaseDataSource {
   prevPage: number;
   nextPage: number;
   lastPage: number;
-  loadPaggedData(page: number, pagesize: number, orderbycolumn: string, orderbydirection: string): void;
+  loadPaggedData(pagesize: number, orderbycolumn: string, orderbydirection: string): Promise<boolean>;
   gotoFirstPage(): boolean;
   gotoPrevPage(): boolean;
   gotoNextPage(): boolean;
   gotoLastPage(): boolean;
-  refresh(): void;
+  getPagingData(): PagingData;
+  refresh(): Promise<boolean>;
 }

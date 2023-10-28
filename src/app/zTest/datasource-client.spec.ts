@@ -42,9 +42,8 @@ describe('DataSourceClient', () => {
     expect(mds.lastPage).toEqual(-1);
 
     // page 1
-    currpage = 0;
-    mds.loadPaggedData(currpage, pagesize, 'masterId');
-    await sleep(1000);
+    await mds.loadPaggedData(pagesize, 'masterId');
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -65,12 +64,11 @@ describe('DataSourceClient', () => {
     //expect(lastDateTime).toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 1');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 2
     const ret2 = mds.gotoNextPage();
-    await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -92,12 +90,11 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     //expect(currentItem.master.name).toEqual('name 21');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 3
     const ret3 = mds.gotoNextPage();
-    await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -119,12 +116,11 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     //expect(currentItem.master.name).toEqual('name 41');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 4
     const ret4 = mds.gotoNextPage();
-    await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -146,12 +142,11 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     //expect(currentItem.master.name).toEqual('name 61');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 5
     const ret5 = mds.gotoNextPage();
-    await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -173,12 +168,11 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     //expect(currentItem.master.name).toEqual('name 81');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page first
     const retf = mds.gotoFirstPage();
-    await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -200,12 +194,12 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 1');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page last
     const retl = mds.gotoLastPage();
-    await sleep(1000);
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -227,34 +221,34 @@ describe('DataSourceClient', () => {
     expect(lastDateTime).toEqual(mds.currentDateTime);
     //expect(currentItem.master.name).toEqual('name 81');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page refresh
-    const retx = mds.refresh();
-    await sleep(1000);
+    const retx = await mds.refresh();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
     //expect(retx).toEqual(true);
-    // expect(mds.currentPage).toEqual(4);
-    // expect(mds.pageSize).toEqual(20);
-    // expect(mds.orderbyColumn).toEqual('masterId');
-    // expect(mds.orderbyDirection).toEqual('asc');
-    // expect(mds.minPage).toEqual(0);
-    // expect(mds.maxPage).toEqual(4);
-    // expect(mds.hasFirstPage).toEqual(true);
-    // expect(mds.hasPrevPage).toEqual(true);
-    // expect(mds.hasNextPage).toEqual(false);
-    // expect(mds.hasLastPage).toEqual(false);
-    // expect(mds.firstPage).toEqual(0);
-    // expect(mds.prevPage).toEqual(3);
-    // expect(mds.nextPage).toEqual(-1);
-    // expect(mds.lastPage).toEqual(4);
-    // expect(lastDateTime).toEqual(mds.currentDateTime);
-    //expect(currentItem.master.name).toEqual('name 81');
+    expect(mds.currentPage).toEqual(4);
+    expect(mds.pageSize).toEqual(20);
+    expect(mds.orderbyColumn).toEqual('masterId');
+    expect(mds.orderbyDirection).toEqual('asc');
+    expect(mds.minPage).toEqual(0);
+    expect(mds.maxPage).toEqual(4);
+    expect(mds.hasFirstPage).toEqual(true);
+    expect(mds.hasPrevPage).toEqual(true);
+    expect(mds.hasNextPage).toEqual(false);
+    expect(mds.hasLastPage).toEqual(false);
+    expect(mds.firstPage).toEqual(0);
+    expect(mds.prevPage).toEqual(3);
+    expect(mds.nextPage).toEqual(-1);
+    expect(mds.lastPage).toEqual(4);
+    expect(lastDateTime).not.toEqual(mds.currentDateTime);
+    expect(currentItem.master.name).toEqual('name 1');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
   });
 

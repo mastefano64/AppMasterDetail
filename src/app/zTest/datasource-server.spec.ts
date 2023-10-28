@@ -43,8 +43,8 @@ describe('DataSourceServer', () => {
 
     // page 1
     currpage = 0;
-    mds.loadPaggedData(currpage, pagesize, 'masterId');
-    await sleep(1000);
+    await mds.loadPaggedData(currpage, pagesize, 'masterId');
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -65,12 +65,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 1');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 2
-    const ret2 = mds.gotoNextPage();
-    await sleep(1000);
+    const ret2 = await mds.gotoNextPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -92,12 +92,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 21');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 3
-    const ret3 = mds.gotoNextPage();
-    await sleep(1000);
+    const ret3 = await mds.gotoNextPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -119,12 +119,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 41');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 4
-    const ret4 = mds.gotoNextPage();
-    await sleep(1000);
+    const ret4 = await mds.gotoNextPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -146,12 +146,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 61');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page 5
-    const ret5 = mds.gotoNextPage();
-    await sleep(1000);
+    const ret5 = await mds.gotoNextPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -173,12 +173,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 81');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page first
-    const retf = mds.gotoFirstPage();
-    await sleep(1000);
+    const retf = await mds.gotoFirstPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -200,12 +200,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 1');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page last
-    const retl = mds.gotoLastPage();
-    await sleep(1000);
+    const retl = await mds.gotoLastPage();
+    //await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -227,12 +227,12 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 81');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
 
     // page refresh
-    const retx = mds.refresh();
-    await sleep(1000);
+    const retx = await mds.refresh();
+    // await sleep(1000);
 
     currentResult = mds.currentResult;
     currentItem = currentResult.items[0];
@@ -254,7 +254,7 @@ describe('DataSourceServer', () => {
     expect(lastDateTime).not.toEqual(mds.currentDateTime);
     expect(currentItem.master.name).toEqual('name 81');
     lastDateTime = mds.currentDateTime;
-    console.log(mds.currentDateTime);
+    console.log(mds.currentDateTime + ' - ' + mds.currentDateTime.getTime());
     console.log(currentItem);
   });
 
